@@ -6,6 +6,10 @@ body {
     padding-top: 65px;
 }
 
+.glyphicon {
+    padding: 2px;
+}
+
 .navbar-default .glyphicon {
     color: black;
 }
@@ -38,3 +42,21 @@ body {
     color: white;
 }
 
+.wrapper img {
+    display: block;
+    max-width:100%;
+}
+
+.wrapper iframe {
+    display: block;
+    max-width:100%;
+}
+
+.wrapper .overlay {
+    position: absolute;
+    top:0;
+    right:0;
+    width: 40px;
+    height: 22px;
+    background-color: white;
+}
