@@ -1,9 +1,17 @@
+@media (min-width: 768px) {
+    .navbar-header {
+        float: none;
+    }
+}
+
 input.form-control {
     margin-bottom: 5px;
 }
 
 body {
     padding-top: 65px;
+    padding-bottom: 65px;
+    height: 100%;
 }
 
 .glyphicon {
@@ -25,6 +33,15 @@ body {
 .list-group-item {
     border: none;
 }
+
+.navbar-default .navbar-brand:hover {
+    color: #777;
+}
+
+.blue-nav-bar .navbar-brand:hover {
+    color: white;
+}
+
 .blue-nav-bar {
     background-color: #337ab7;
     border-color: #2e6da4;
