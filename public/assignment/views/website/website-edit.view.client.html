@@ -74,11 +74,11 @@
             <form>
                 <div class="form-group">
                     <label for="web_site_name"> Website Name</label>
-                    <input ngModel="EditWebsiteCtrl.website.name" type="text" class="form-control" id="web_site_name" placeholder="">
+                    <input ng-model="EditWebsiteCtrl.website.name" type="text" class="form-control" id="web_site_name" placeholder="">
                 </div>
                 <div class="form-group">
                     <label for="description">Website Description</label>
-                    <textarea ngModel="EditWebsiteCtrl.website.desc" rows="6" type="text" class="form-control" id="description" placeholder=""></textarea>
+                    <textarea ng-model="EditWebsiteCtrl.website.desc" rows="6" type="text" class="form-control" id="description" placeholder=""></textarea>
                 </div>
                 <a href="#/user/:uid/website/:wid" class="btn btn-danger btn-block">Delete</a>
             </form>

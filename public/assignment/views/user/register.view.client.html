@@ -1,10 +1,10 @@
 <div class="container">
     <h1>Register</h1>
-    <input ngModel="RegisterCtrl.user.username"
+    <input ng-model="RegisterCtrl.user.username"
            type="text"
            class="form-control"
            placeholder="Username"/>
-    <input ngModel="RegisterCtrl.user.password"
+    <input ng-model="RegisterCtrl.user.password"
            type="password"
            class="form-control"
            placeholder="pA$$w0rD"/>
@@ -12,7 +12,7 @@
            class="form-control"
            placeholder="Verify Password"/>
     <a class="btn btn-primary btn-block"
-       href="#/user/:uid">Register</a>
+       ng-click="RegisterCtrl.register(RegisterCtrl.user)">Register</a>
     <a class="btn btn-danger  btn-block"
        href="#/login">Cancel</a>
 </div>

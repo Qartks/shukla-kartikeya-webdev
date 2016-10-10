@@ -1,14 +1,14 @@
 <div class="container">
     <h1>Login</h1>
-    <input  ngModel="LoginCtrl.user.username"
+    <input  ng-model="LoginCtrl.user.username"
             type="text"
             class="form-control"
             placeholder="Username"/>
-    <input  ngModel="LoginCtrl.user.password"
+    <input  ng-model="LoginCtrl.user.password"
             type="password"
             class="form-control"
             placeholder="pA$$w0rD"/>
-    <a class="btn btn-primary btn-block" href="#/user/:uid">
+    <a class="btn btn-primary btn-block" ng-click="LoginCtrl.login(LoginCtrl.user)">
         Login</a>
     <a class="btn btn-success btn-block" href="#/register">
         Register</a>
