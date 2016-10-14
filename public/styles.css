@@ -1,0 +1,22 @@
+#content {
+    overflow: auto;
+    margin: auto;
+    position: absolute;
+    text-align: center;
+    z-index: 2;
+    color: aliceblue;
+    width: 40%;
+    height: 50%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}

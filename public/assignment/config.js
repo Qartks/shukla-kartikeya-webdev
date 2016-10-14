@@ -76,7 +76,3 @@
 
     }
 })();
-
-
-// /user/:uid/website/:wid/page/:pid/widget/new		widget-chooser.view.client.html
-// /user/:uid/website/:wid/page/:pid/widget/:wgid		widget-edit.view.client.html

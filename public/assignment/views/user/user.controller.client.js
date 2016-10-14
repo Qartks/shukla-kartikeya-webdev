@@ -16,7 +16,7 @@
             if(user) {
                 $location.url("/user/" + user._id);
             } else {
-                alert("Unable to login");
+                vm.error = "Unable to login";
             }
         }
     }
@@ -35,7 +35,7 @@
 
     function ProfileController($routeParams, UserService) {
         var vm = this;
-        vm.userId = $routeParams.uid;
+        vm.userId = $routeParams['uid'];
         function init() {
             vm.user = UserService.findUserById(vm.userId);
         }
