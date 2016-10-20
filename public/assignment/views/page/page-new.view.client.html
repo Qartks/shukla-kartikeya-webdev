@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-left">
-                <a href="#/user/:uid/website/:wid/page" class="navbar-link">
+                <a href="#/user/{{NewPageCtrl.userId}}/website/{{NewPageCtrl.websiteId}}/page" class="navbar-link">
                     <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
             </p>
@@ -10,7 +10,7 @@
                 <b>New Page</b>
             </a>
             <p class="navbar-text pull-right">
-                <a href="#/user/:uid/website/:wid/page" class="navbar-link">
+                <a href="" ng-click="NewPageCtrl.createPage()"  class="navbar-link">
                     <span class="glyphicon glyphicon-ok"></span>
                 </a>
             </p>

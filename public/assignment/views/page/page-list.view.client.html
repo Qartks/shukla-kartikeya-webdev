@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-left">
-                <a href="#/user/:wid/website" class="navbar-link">
+                <a href="#/user/{{PageListCtrl.userId}}/website" class="navbar-link">
                     <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
             </p>
@@ -10,7 +10,7 @@
                 <b>Pages</b>
             </a>
             <p class="navbar-text pull-right">
-                <a href="#/user/:uid/website/:wid/page/new" class="navbar-link">
+                <a href="#/user/{{PageListCtrl.userId}}/website/{{PageListCtrl.websiteId}}/page/new" class="navbar-link">
                     <span class="glyphicon glyphicon-plus"></span>
                 </a>
             </p>
@@ -20,33 +20,10 @@
 
 <div class="container">
     <ul class="list-group">
-        <li class="list-group-item">
-            <a href="#/user/:uid/website/:wid/page/:pid/widget"> Blog Post </a>
-            <a href="#/user/:uid/website/:wid/page/:pid">
-                <span class="glyphicon glyphicon-cog pull-right"></span>
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="#/user/:uid/website/:wid/page/:pid/widget"> Blogs </a>
-            <a href="#/user/:uid/website/:wid/page/:pid">
-                <span class="glyphicon glyphicon-cog pull-right"></span>
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="#/user/:uid/website/:wid/page/:pid/widget"> Home </a>
-            <a href="#/user/:uid/website/:wid/page/:pid">
-                <span class="glyphicon glyphicon-cog pull-right"></span>
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="#/user/:uid/website/:wid/page/:pid/widget"> About </a>
-            <a href="#/user/:uid/website/:wid/page/:pid">
-                <span class="glyphicon glyphicon-cog pull-right"></span>
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="#/user/:uid/website/:wid/page/:pid/widget"> Contact Us </a>
-            <a href="#/user/:uid/website/:wid/page/:pid">
+        <li ng-repeat="pgRepeat in PageListCtrl.pages" class="list-group-item">
+            <a href="#/user/{{PageListCtrl.userId}}/website/{{PageListCtrl.websiteId}}/page/{{pgRepeat._id}}/widget">
+                {{pgRepeat.name}} </a>
+            <a href="#/user/{{PageListCtrl.userId}}/website/{{PageListCtrl.websiteId}}/page/{{pgRepeat._id}}">
                 <span class="glyphicon glyphicon-cog pull-right"></span>
             </a>
         </li>
@@ -57,7 +34,7 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-right">
-                <a href="#/user/:uid" class="navbar-link">
+                <a href="#/user/{{PageListCtrl.uid}}" class="navbar-link">
                     <span class="glyphicon glyphicon-user"></span>
                 </a>
             </p>

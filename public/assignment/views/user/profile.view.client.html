@@ -5,7 +5,7 @@
                 <b>Profile</b>
             </a>
             <p class="navbar-text pull-right">
-                <a ng-click="ProfileCtrl.update(ProfileCtrl.user)" class="navbar-link">
+                <a href="" ng-click="ProfileCtrl.update(ProfileCtrl.user)" class="navbar-link">
               <span class="glyphicon glyphicon-ok">
               </span>
                 </a>
@@ -39,7 +39,7 @@
     </form>
 
     <a class="btn btn-primary btn-block"
-       href="#/user/:uid/website">Websites</a>
+       href="#/user/{{ProfileCtrl.user._id}}/website">Websites</a>
     <a class="btn btn-danger  btn-block"
        href="#/login">Logout</a>
 </div>

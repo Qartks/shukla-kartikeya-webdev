@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-left">
-                <a href="#/user/:uid" class="navbar-link">
+                <a href="#/user/{{WebListCtrl.userId}}" class="navbar-link">
                     <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
             </p>
@@ -10,7 +10,7 @@
                 <b>Websites</b>
             </a>
             <p class="navbar-text pull-right">
-                <a href="#/user/:uid/website/new" class="navbar-link">
+                <a href="#/user/{{WebListCtrl.userId}}/website/new" class="navbar-link">
                     <span class="glyphicon glyphicon-plus"></span>
                 </a>
             </p>
@@ -20,27 +20,9 @@
 
 <div class="container">
     <ul class="list-group">
-        <li class="list-group-item">
-            <a href="#/user/:uid/website/:wid/page"> Address Book App </a>
-            <a href="#/user/:uid/website/:wid">
-                <span class="glyphicon glyphicon-cog pull-right"></span>
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="#/user/:uid/website/:wid/page"> Blogger </a>
-            <a href="#/user/:uid/website/:wid">
-                <span class="glyphicon glyphicon-cog pull-right"></span>
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="#/user/:uid/website/:wid/page"> Blogging App </a>
-            <a href="#/user/:uid/website/:wid">
-                <span class="glyphicon glyphicon-cog pull-right"></span>
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="#/user/:uid/website/:wid/page"> Script Testing App </a>
-            <a href="#/user/:uid/website/:wid">
+        <li ng-repeat="sites in WebListCtrl.websites" class="list-group-item">
+            <a href="#/user/{{WebListCtrl.userId}}/website/{{sites._id}}/page"> {{sites.name}} </a>
+            <a href="#/user/{{WebListCtrl.userId}}/website/{{sites._id}}">
                 <span class="glyphicon glyphicon-cog pull-right"></span>
             </a>
         </li>
@@ -51,7 +33,7 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-right">
-                <a href="#/user/:uid" class="navbar-link">
+                <a href="#/user/{{WebListCtrl.userId}}" class="navbar-link">
                     <span class="glyphicon glyphicon-user"></span>
                 </a>
             </p>

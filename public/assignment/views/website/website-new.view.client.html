@@ -4,7 +4,7 @@
             <div class="hidden-sm hidden-xs col-md-4">
                 <div class="navbar-header">
                     <p class="navbar-text pull-left">
-                        <a href="#/user/:uid" class="navbar-link">
+                        <a href="#/user/{{NewWebsiteCtrl.userId}}" class="navbar-link">
                             <span class="glyphicon glyphicon-chevron-left"></span>
                         </a>
                     </p>
@@ -12,7 +12,7 @@
                         <b>Websites</b>
                     </a>
                     <p class="navbar-text pull-right">
-                        <a href="#/user/:uid/website/new" class="navbar-link">
+                        <a href="#/user/{{NewWebsiteCtrl.userId}}/website/new" class="navbar-link">
                             <span class="glyphicon glyphicon-plus"></span>
                         </a>
                     </p>
@@ -21,7 +21,7 @@
             <div class="col-sm-12 col-md-8">
                 <div class="navbar-header">
                     <p class="navbar-text pull-left visible-sm visible-xs">
-                        <a href="#/user/:uid/website/:wid" class="navbar-link">
+                        <a href="#/user/{{NewWebsiteCtrl.userId}}/website" class="navbar-link">
                             <span class="glyphicon glyphicon-chevron-left"></span>
                         </a>
                     </p>
@@ -29,7 +29,7 @@
                         <b>New Website</b>
                     </a>
                     <p class="navbar-text pull-right">
-                        <a href="#/user/:uid/website" class="navbar-link">
+                        <a href="" ng-click="NewWebsiteCtrl.createWebsite()" class="navbar-link">
                             <span class="glyphicon glyphicon-ok"></span>
                         </a>
                     </p>
@@ -43,27 +43,9 @@
     <div class="row">
         <div class="hidden-sm hidden-xs col-md-4">
             <ul class="list-group">
-                <li class="list-group-item">
-                    <a href="#/user/:uid/website/:wid/page"> Address Book App </a>
-                    <a href="#/user/:uid/website/:wid">
-                        <span class="glyphicon glyphicon-cog pull-right"></span>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a href="#/user/:uid/website/:wid/page"> Blogger </a>
-                    <a href="#/user/:uid/website/:wid">
-                        <span class="glyphicon glyphicon-cog pull-right"></span>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a href="#/user/:uid/website/:wid/page"> Blogging App </a>
-                    <a href="#/user/:uid/website/:wid">
-                        <span class="glyphicon glyphicon-cog pull-right"></span>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a href="#/user/:uid/website/:wid/page"> Script Testing App </a>
-                    <a href="#/user/:uid/website/:wid">
+                <li ng-repeat="sites in NewWebsiteCtrl.websites" class="list-group-item">
+                    <a href="#/user/{{NewWebsiteCtrl.userId}}/website/{{sites._id}}/page"> {{sites.name}} </a>
+                    <a href="#/user/{{NewWebsiteCtrl.userId}}/website/{{sites._id}}">
                         <span class="glyphicon glyphicon-cog pull-right"></span>
                     </a>
                 </li>
@@ -90,7 +72,7 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-right">
-                <a href="#/user/:uid" class="navbar-link">
+                <a href="#/user/{{NewWebsiteCtrl.userId}}" class="navbar-link">
                     <span class="glyphicon glyphicon-user"></span>
                 </a>
             </p>

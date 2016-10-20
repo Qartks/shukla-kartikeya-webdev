@@ -1,3 +1,7 @@
+(function () {
+
+})();
+
 var stars = []
 
 var speed;
@@ -21,7 +25,6 @@ function draw() {
     for (var i = 0; i < stars.length; i++) {
         stars[i].update();
         stars[i].show();
-        stars[i].drawLine();
     }
 }
 
@@ -48,9 +51,5 @@ function Star() {
 
         var r = map(this.z, 0, width, 12, 0);
         ellipse(sx, sy, r, r);
-    }
-
-    this.drawLine = function () {
-
     }
 }
