@@ -61,12 +61,17 @@
             .when("/user/:uid/website/:wid/page/:pid/widget/new", {
                 templateUrl : "views/widget/widget-chooser.view.client.html",
                 controller : "NewWidgetController",
-                controllerAs : "NewWidgetCtrl"
+                controllerAs : "model"
+            })
+            .when("/user/:uid/website/:wid/page/:pid/widget/create", {
+                templateUrl : "views/widget/widget-new.view.client.html",
+                controller : "NewWidgetController",
+                controllerAs : "model"
             })
             .when("/user/:uid/website/:wid/page/:pid/widget/:wgid", {
                 templateUrl : "views/widget/widget-edit.view.client.html",
                 controller : "EditWidgetController",
-                controllerAs : "EditWidgetCtrl"
+                controllerAs : "model"
             })
             .otherwise({
                 redirectTo : "/login"

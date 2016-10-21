@@ -9,7 +9,7 @@
             {_id: "123", username: "alice", password: "alice", firstName: "Alice", lastName: "Wonder", email: "alicewonder@Mhatter.com"},
             {_id: "234", username: "bob", password: "bob", firstName: "Bob", lastName: "Marley", email: "bob@bob.com"},
             {_id: "345", username: "charly", password: "charly", firstName: "Charly", lastName: "Garcia"},
-            {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose", lastName: "Annunzi", email: "jannunzi@gmail.com"}
+            {_id: "456", username: "kshukla", password: "kshukla", firstName: "Kartikeya", lastName: "Shukla", email: "Me@gmail.com"}
         ];
 
         return {

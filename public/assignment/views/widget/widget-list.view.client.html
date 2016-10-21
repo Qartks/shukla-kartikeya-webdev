@@ -20,23 +20,62 @@
 
 <div class="container">
     <ul class="list-group">
-        <div ng-repeat="w in WidgetListCtrl.widgets"
-             ng-switch="w.widgetType">
+        <div ng-repeat="w in WidgetListCtrl.widgets" ng-switch="w.widgetType">
+
             <div ng-switch-when="YOUTUBE">
-                <iframe width="560" height="315" ng-src="{{ WidgetListCtrl.checkSafeYouTube(w.url) }}" frameborder="0" allowfullscreen></iframe>
+                <div class="list-group-item wrapper">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe ng-src="{{ WidgetListCtrl.checkSafeYouTube(w.url) }}" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="overlay">
+                        <span class="glyphicon glyphicon-align-justify pull-right"></span>
+                        <a href="#/user/{{WidgetListCtrl.userId}}/website/{{WidgetListCtrl.websiteId}}/page/{{WidgetListCtrl.pageId}}/widget/{{w._id}}">
+                            <span class="glyphicon glyphicon-cog pull-right"></span>
+                        </a>
+                    </div>
+                </div>
             </div>
+
             <div ng-switch-when="HEADER"
                  ng-switch="w.size">
-                <h1 ng-switch-when="1">{{w.text}}</h1>
-                <h2 ng-switch-when="2">{{w.text}}</h2>
-                <h3 ng-switch-when="3">{{w.text}}</h3>
-                <h4 ng-switch-when="4">{{w.text}}</h4>
-                <h5 ng-switch-when="5">{{w.text}}</h5>
-                <h6 ng-switch-when="6">{{w.text}}</h6>
+                <div class="list-group-item wrapper">
+                    <h1 ng-switch-when="1">{{w.text}}</h1>
+                    <h2 ng-switch-when="2">{{w.text}}</h2>
+                    <h3 ng-switch-when="3">{{w.text}}</h3>
+                    <h4 ng-switch-when="4">{{w.text}}</h4>
+                    <h5 ng-switch-when="5">{{w.text}}</h5>
+                    <h6 ng-switch-when="6">{{w.text}}</h6>
+                    <div class="overlay">
+                        <span class="glyphicon glyphicon-align-justify pull-right"></span>
+                        <a href="#/user/{{WidgetListCtrl.userId}}/website/{{WidgetListCtrl.websiteId}}/page/{{WidgetListCtrl.pageId}}/widget/{{w._id}}">
+                            <span class="glyphicon glyphicon-cog pull-right"></span>
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div ng-switch-when="IMAGE">
-                Image
-            <div ng-switch-when="HTML" ng-bind-html="WidgetListCtrl.checkSafeHTML(w.text)"></div>
+
+            <div ng-switch-when="IMAGE" class="list-group-item wrapper">
+                <img class="img-responsive" ng-src="{{ w.url }}">
+                <div class="overlay">
+                    <span class="glyphicon glyphicon-align-justify pull-right"></span>
+                    <a href="#/user/{{WidgetListCtrl.userId}}/website/{{WidgetListCtrl.websiteId}}/page/{{WidgetListCtrl.pageId}}/widget/{{w._id}}">
+                        <span class="glyphicon glyphicon-cog pull-right"></span>
+                    </a>
+                </div>
+            </div>
+
+            <div ng-switch-when="HTML">
+                <div class="list-group-item wrapper">
+                    <div ng-bind-html="WidgetListCtrl.checkSafeHTML(w.text)"></div>
+                    <div class="overlay">
+                        <span class="glyphicon glyphicon-align-justify pull-right"></span>
+                        <a href="#/user/{{WidgetListCtrl.userId}}/website/{{WidgetListCtrl.websiteId}}/page/{{WidgetListCtrl.pageId}}/widget/{{w._id}}">
+                            <span class="glyphicon glyphicon-cog pull-right"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </ul>
 </div>
@@ -45,7 +84,7 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-right">
-                <a href="/user/{{WidgetListCtrl.userId}}" class="navbar-link">
+                <a href="#/user/{{WidgetListCtrl.userId}}" class="navbar-link">
                     <span class="glyphicon glyphicon-user"></span>
                 </a>
             </p>

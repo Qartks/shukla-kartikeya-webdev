@@ -26,13 +26,9 @@
         </div>
         <div class="form-group">
             <label for="heading_text">Title </label>
-            <input ng-model="model.widget.text" type="text" class="form-control" id="heading_text" placeholder="Text">
+            <textarea ng-model="model.widget.text" type="text" class="form-control" id="heading_text" placeholder="Text" rows="10"></textarea>
         </div>
 
-        <div class="form-group">
-            <label for="heading_size">Title </label>
-            <input ng-model="model.widget.size" type="number" class="form-control" id="heading_size" placeholder="3">
-        </div>
         <a ng-click="model.deleteWidget()" class="btn btn-danger btn-block">Delete</a>
     </form>
 
