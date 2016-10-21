@@ -63,7 +63,7 @@
                 controller : "NewWidgetController",
                 controllerAs : "model"
             })
-            .when("/user/:uid/website/:wid/page/:pid/widget/create", {
+            .when("/user/:uid/website/:wid/page/:pid/widget/create/:wgid", {
                 templateUrl : "views/widget/widget-new.view.client.html",
                 controller : "NewWidgetController",
                 controllerAs : "model"

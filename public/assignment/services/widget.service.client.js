@@ -35,6 +35,7 @@
             widget._id = widgetCounter++;
             widget.pageId = pageId;
             widgets.push(widget);
+            console.log(widgets);
             return widget;
         }
 
