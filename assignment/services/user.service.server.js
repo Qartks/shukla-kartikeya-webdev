@@ -24,10 +24,14 @@ module.exports = function (app) {
 
     function deleteUser(req, res) {
         var userId = req.params.userId;
-        var index = users.indexOf(users._id === userId);
-        if (index > -1) {
-            users.splice(index, 1);
-            res.sendStatus(200);
+        for (var key in users) {
+            if (users.hasOwnProperty(key)) {
+                if (users[key]._id == userId) {
+                    users.splice(key,1);
+                    res.sendStatus(200);
+                    return;
+                }
+            }
         }
         res.send("0");
     }
@@ -88,7 +92,7 @@ module.exports = function (app) {
         var userId = req.params.userId;
         for (var key in users) {
             if (users.hasOwnProperty(key)) {
-                if (users[key]._id === userId) {
+                if (users[key]._id == userId) {
                     users[key] = user;
                     res.send(user);
                     return;
