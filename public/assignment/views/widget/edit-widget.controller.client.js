@@ -19,17 +19,45 @@
         }
 
         function init() {
-            vm.widget = WidgetService.findWidgetById(vm.widgetId);
+            WidgetService.findWidgetById(vm.widgetId)
+                .success(function (widget) {
+                    if (widget == "0") {
+                        vm.error = "Couldn't find";
+                    } else {
+                        vm.widget = widget;
+                    }
+                })
+                .error(function (err) {
+                    console.log(err);
+                });
         }
         
         function deleteWidget() {
-            WidgetService.deleteWidget(vm.widgetId);
-            $location.url("/user/"+ vm.userId +"/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
+            WidgetService.deleteWidget(vm.widgetId)
+                .success(function (status) {
+                    if (status == "0") {
+                        vm.error = "Couldn't delete";
+                    } else {
+                        $location.url("/user/"+ vm.userId +"/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
+                    }
+                })
+                .error(function (err) {
+                    console.log(err);
+                });
         }
         
         function updateWidget() {
-            WidgetService.updateWidget(vm.widgetId, vm.widget);
-            $location.url("/user/"+ vm.userId +"/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
+            WidgetService.updateWidget(vm.widgetId, vm.widget)
+                .success(function (w) {
+                    if (w == "0") {
+                        vm.error = "Couldn't update";
+                    } else {
+                        $location.url("/user/"+ vm.userId +"/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
+                    }
+                })
+                .error(function (err) {
+                    console.log(err);
+                });
         }
 
         init();

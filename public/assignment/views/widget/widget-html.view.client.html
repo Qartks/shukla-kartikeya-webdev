@@ -7,7 +7,8 @@
                 </a>
             </p>
             <a class="navbar-brand" href="#">
-                <b>Widget Edit</b>
+                <b ng-hide="model.newWidget">Widget Edit</b>
+                <b ng-show="model.newWidget">Widget Create</b>
             </a>
             <p class="navbar-text pull-right">
                 <a ng-click="model.updateWidget()" class="navbar-link">
@@ -29,7 +30,7 @@
             <textarea ng-model="model.widget.text" type="text" class="form-control" id="heading_text" placeholder="Text" rows="10"></textarea>
         </div>
 
-        <a ng-click="model.deleteWidget()" class="btn btn-danger btn-block">Delete</a>
+        <a ng-hide="model.newWidget" ng-click="model.deleteWidget()" class="btn btn-danger btn-block">Delete</a>
     </form>
 
 </div>

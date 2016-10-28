@@ -24,7 +24,17 @@
         }
 
         function init() {
-            vm.widgets = WidgetService.findWidgetsByPageId(vm.pageId);
+            WidgetService.findWidgetsByPageId(vm.pageId)
+                .success(function (widgets) {
+                    if (widgets == "0") {
+                        vm.error = "Couldn't find Widgets";
+                    } else {
+                        vm.widgets = widgets;
+                    }
+                })
+                .error(function (err) {
+                    console.log(err);
+                });
         }
         init();
     }

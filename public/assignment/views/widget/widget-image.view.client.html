@@ -7,7 +7,8 @@
                 </a>
             </p>
             <a class="navbar-brand" href="#">
-                <b>Widget Edit</b>
+                <b ng-hide="model.newWidget">Widget Edit</b>
+                <b ng-show="model.newWidget">Widget Create</b>
             </a>
             <p class="navbar-text pull-right">
                 <a ng-click="model.updateWidget()" class="navbar-link">
@@ -41,7 +42,7 @@
             <input ng-model="model.widget.upload" type="file" class="form-control" id="image_upload">
         </div>
         <a href="#" class="btn btn-primary btn-block">Upload</a>
-        <a ng-click="model.deleteWidget()" class="btn btn-danger btn-block">Delete</a>
+        <a ng-hide="model.newWidget" ng-click="model.deleteWidget()" class="btn btn-danger btn-block">Delete</a>
     </form>
 
 </div>
