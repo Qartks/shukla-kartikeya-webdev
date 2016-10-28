@@ -2,7 +2,7 @@
 
 })();
 
-var stars = []
+var stars = [];
 var canvas;
 var speed = 8;
 var elt;
@@ -72,10 +72,10 @@ function Star() {
         this.dirY = 1;
     }
 
-    this.update = update2;
+    this.update = update1;
 
     function update1() {
-        // this.z = this.z - speed;
+        this.z = this.z - speed;
         if (this.z < 1) {
             this.z = width;
             this.x = random(-width, width);

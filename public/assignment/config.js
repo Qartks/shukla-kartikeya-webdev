@@ -49,7 +49,7 @@
                 controllerAs : "NewPageCtrl"
             })
             .when("/user/:uid/website/:wid/page/:pid", {
-                templateUrl : "views/page/page-edit.view.client.html",
+                templateUrl : "views/page/list-page-edit.view.client.html",
                 controller : "EditPageController",
                 controllerAs : "EditPageCtrl"
             })
