@@ -27,7 +27,7 @@ module.exports = function (app) {
         var index = users.indexOf(users._id === userId);
         if (index > -1) {
             users.splice(index, 1);
-            res.send(200);
+            res.sendStatus(200);
         }
         res.send("0");
     }

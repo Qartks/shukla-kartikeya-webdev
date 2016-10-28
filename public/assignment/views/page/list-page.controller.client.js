@@ -11,7 +11,13 @@
 
 
         function init() {
-            vm.pages = PageService.findPageByWebsiteId(vm.websiteId);
+            PageService.findPageByWebsiteId(vm.websiteId)
+                .success(function (pages) {
+                    vm.pages = pages;
+                })
+                .error(function (err) {
+                    console.log(err);
+                });
         }
         init();
     }

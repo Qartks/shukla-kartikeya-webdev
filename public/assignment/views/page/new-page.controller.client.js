@@ -11,12 +11,16 @@
         this.createPage = createPage;
 
         function createPage() {
-            var tmp = PageService.createPage(vm.websiteId, vm.page);
-            if (tmp) {
-                $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
-            }
+            PageService.createPage(vm.websiteId, vm.page)
+                .success(function (page) {
+                    if (page) {
+                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+                    }
+                })
+                .error(function (err) {
+                    console.log(err);
+                });
         }
-
     }
 
 })();

@@ -71,7 +71,7 @@ module.exports = function (app) {
             if (websites.hasOwnProperty(key)) {
                 if (websites[key]._id == websiteId) {
                     websites.splice(key,1);
-                    res.send(200);
+                    res.sendStatus(200);
                 }
             }
         }
