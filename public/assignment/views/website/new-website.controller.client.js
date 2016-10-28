@@ -12,14 +12,26 @@
         vm.createWebsite = createWebsite;
 
         function createWebsite() {
-            var web = WebsiteService.createWebsite(vm.userId, vm.website);
-            if(web) {
-                $location.url("/user/" + vm.userId + "/website");
-            }
+            WebsiteService.createWebsite(vm.userId, vm.website)
+                .success(function (web) {
+                    if(web) {
+                        $location.url("/user/" + vm.userId + "/website");
+                    }
+                })
+                .error(function (err) {
+                    console.log(err);
+                });
+
         }
 
         function init() {
-            vm.websites = WebsiteService.findWebsitesByUser(vm.userId);
+            WebsiteService.findWebsitesByUser(vm.userId)
+                .success(function (websites) {
+                    vm.websites = websites;
+                })
+                .error(function (err) {
+                    console.log(err);
+                })
         }
         init();
     }

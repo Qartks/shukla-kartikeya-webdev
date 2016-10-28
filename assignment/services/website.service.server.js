@@ -20,27 +20,62 @@ module.exports = function (app) {
         var userId = req.params.userId;
         var result = [];
         for (var w in websites) {
-            if (websites[w]._id == userId) {
+            if (websites[w].developerId == userId) {
                 result.push(websites[w]);
             }
         }
-        res.send(200);
+        res.send(result);
     }
     
-    function createWebsite() {
+    function createWebsite(req, res) {
+        var website = req.body;
+        var userId = req.params.userId;
+        website._id = (new Date()).getTime();
+        website["developerId"] = userId;
+        websites.push(website);
+        res.send(websites);
+    }
+
+    function findWebsiteById(req, res) {
+        var websiteId = req.params.websiteId;
+        for (var key in websites) {
+            if (websites.hasOwnProperty(key)) {
+                if (websites[key]._id == websiteId) {
+                    res.send(websites[key]);
+                    return;
+                }
+            }
+        }
+        res.send("0");
+    }
+
+    function updateWebsite(req, res) {
+        var website = req.body;
+        var websiteId = req.params.websiteId;
+        for (var key in websites) {
+            if (websites.hasOwnProperty(key)) {
+                if (websites[key]._id == websiteId) {
+                    websites[key] = website;
+                    res.send(website);
+                    return;
+                }
+            }
+        }
+        res.send("0");
 
     }
 
-    function findWebsiteById() {
-
-    }
-
-    function updateWebsite() {
-
-    }
-
-    function deleteWebsite() {
-
+    function deleteWebsite(req, res) {
+        var websiteId = req.params.websiteId;
+        for (var key in websites) {
+            if (websites.hasOwnProperty(key)) {
+                if (websites[key]._id == websiteId) {
+                    websites.splice(key,1);
+                    res.send(200);
+                }
+            }
+        }
+        res.send("0");
     }
 
 }
