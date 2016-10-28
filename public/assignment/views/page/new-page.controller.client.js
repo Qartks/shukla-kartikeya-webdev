@@ -13,7 +13,9 @@
         function createPage() {
             PageService.createPage(vm.websiteId, vm.page)
                 .success(function (page) {
-                    if (page) {
+                    if (page == "0") {
+                        vm.error = "Can't Create Page";
+                    } else {
                         $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
                     }
                 })

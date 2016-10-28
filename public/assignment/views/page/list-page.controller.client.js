@@ -13,7 +13,11 @@
         function init() {
             PageService.findPageByWebsiteId(vm.websiteId)
                 .success(function (pages) {
-                    vm.pages = pages;
+                    if (pages == "0") {
+                        vm.error = "Can't Find Page";
+                    } else {
+                        vm.pages = pages;
+                    }
                 })
                 .error(function (err) {
                     console.log(err);

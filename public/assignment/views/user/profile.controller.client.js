@@ -11,7 +11,9 @@
             UserService
                 .findUserById(vm.userId)
                 .success(function (user) {
-                    if (user!= "0") {
+                    if(user == "0") {
+                        alert("Unable to Find");
+                    } else {
                         vm.user = user;
                     }
                 })
@@ -22,7 +24,17 @@
         init();
 
         vm.update = function (user) {
-            UserService.updateUser(vm.user);
+            UserService.updateUser(user)
+                .success(function (user) {
+                    if(user == "0") {
+                        alert("Unable to Find");
+                    } else {
+                        vm.user = user;
+                    }
+                })
+                .error(function () {
+                    console.log("Error!!!");
+                });
         }
 
     }

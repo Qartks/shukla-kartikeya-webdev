@@ -33,7 +33,7 @@ module.exports = function (app) {
         website._id = (new Date()).getTime();
         website["developerId"] = userId;
         websites.push(website);
-        res.send(websites);
+        res.send(website);
     }
 
     function findWebsiteById(req, res) {
@@ -72,6 +72,7 @@ module.exports = function (app) {
                 if (websites[key]._id == websiteId) {
                     websites.splice(key,1);
                     res.sendStatus(200);
+                    return;
                 }
             }
         }

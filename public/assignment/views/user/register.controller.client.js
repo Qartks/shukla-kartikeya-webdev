@@ -11,10 +11,10 @@
         function register (user) {
             UserService.createUser(user)
                 .success(function (user) {
-                    if(user) {
-                        $location.url("/user/" + user._id);
-                    } else {
+                    if(user == "0") {
                         alert("Unable to Register");
+                    } else {
+                        $location.url("/user/" + user._id);
                     }
                 })
                 .error(function (err) {

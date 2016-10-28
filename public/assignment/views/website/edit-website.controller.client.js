@@ -22,8 +22,12 @@
 
         function updateWebsite() {
             WebsiteService.updateWebsite(vm.websiteId, vm.website)
-                .success(function () {
-                    $location.url("/user/" + vm.userId + "/website");
+                .success(function (website) {
+                    if (website == "0") {
+                        vm.error = "Can't update";
+                    } else {
+                        $location.url("/user/" + vm.userId + "/website");
+                    }
                 })
                 .error(function (err) {
                     console.log(err);
@@ -33,8 +37,11 @@
         function deleteWebsite() {
             WebsiteService.deleteWebsite(vm.websiteId, vm.websites)
                 .success(function (websites) {
-                    vm.websites = websites;
-                    $location.url("/user/" + vm.userId + "/website");
+                    if (websites == "0") {
+                        vm.error = "Couldn't delete";
+                    } else {
+                        $location.url("/user/" + vm.userId + "/website");
+                    }
                 })
                 .error(function (err) {
                     console.log(err);
