@@ -34,6 +34,14 @@
                 })
                 .error(function (err) {
                     console.log(err);
+                })
+                .finally(function () {
+                    // $( function() {
+                    //     $( "#wam-widget" )
+                    //         .sortable({
+                    //             axis: 'y'
+                    //         });
+                    // } );
                 });
         }
         init();

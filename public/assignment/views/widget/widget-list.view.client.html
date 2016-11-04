@@ -19,8 +19,8 @@
 </nav>
 
 <div class="container">
-    <ul class="list-group">
-        <div ng-repeat="w in WidgetListCtrl.widgets" ng-switch="w.widgetType" class="wam-widget">
+    <ul class="list-group" id="wam-widget" wam-sortable>
+        <div ng-repeat="w in WidgetListCtrl.widgets" ng-switch="w.widgetType">
 
             <div ng-switch-when="YOUTUBE">
                 <div class="list-group-item wrapper">

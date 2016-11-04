@@ -8,13 +8,14 @@
     "body-parser": "^1.15.1",
     "express": "^4.13.4",
     "jquery": "^3.1.1",
-    "mongoose": "^4.4.15"
+    "mongoose": "^4.4.15",
+    "multer": "^1.2.0"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "author": "Jose G. Annunziato",
+  "author": "Kartikeya Shukla",
   "license": "ISC"
 }
