@@ -1,7 +1,7 @@
 module.exports = function (app) {
 
     var multer = require('multer');
-    var upload = multer({ dest: __dirname+'/../uploads' });
+    var upload = multer({ dest: __dirname+'/../../public/assignment/uploads' });
 
 
     app.post ("/api/upload", upload.single('myFile'), uploadImage);
@@ -25,7 +25,8 @@ module.exports = function (app) {
             if (pageId !== existingWidget.pageId) {
                 continue;
             }
-            if (widgetId === existingWidget._id) {
+            if (widgetId == existingWidget._id) {
+                existingWidget.name = originalname;
                 existingWidget.url = '/assignment/uploads/' + filename;
                 break;
             }

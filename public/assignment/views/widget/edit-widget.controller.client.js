@@ -9,11 +9,18 @@
         vm.websiteId = $routeParams["wid"];
         vm.pageId = $routeParams["pid"];
         vm.widgetId = $routeParams["wgid"];
+        vm.fileUpload = true;
+
 
         vm.deleteWidget = deleteWidget;
         vm.updateWidget = updateWidget;
         vm.goBack = goBack;
-        
+        vm.uploadFile = uploadFile;
+
+        function uploadFile() {
+            vm.fileUpload = !vm.fileUpload;
+        }
+
         function goBack() {
             $location.url("/user/"+ vm.userId +"/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
         }
