@@ -9,19 +9,29 @@ module.exports = function (app) {
 
     function uploadImage(req, res) {
 
-        var widgetId      = req.body.widgetId;
-        var width         = req.body.width;
-        var myFile        = req.file;
+        var userId = req.body.userId;
+        var websiteId = req.body.websiteId;
+        var pageId = req.body.pageId;
+        var widgetId = req.body.widgetId;
+        var imageFile = req.file;
+
+        var originalname  = imageFile.originalname; // file name on user's computer
+        var filename      = imageFile.filename;     // new file name in upload folder
+        var path          = imageFile.path;         // full path of uploaded file
 
 
-        var originalname  = myFile.originalname; // file name on user's computer
-        var filename      = myFile.filename;     // new file name in upload folder
-        var path          = myFile.path;         // full path of uploaded file
-        var destination   = myFile.destination;  // folder where file is saved to
-        var size          = myFile.size;
-        var mimetype      = myFile.mimetype;
+        for (var wg in widgets) {
+            var existingWidget = widgets[wg];
+            if (pageId !== existingWidget.pageId) {
+                continue;
+            }
+            if (widgetId === existingWidget._id) {
+                existingWidget.url = '/assignment/uploads/' + filename;
+                break;
+            }
+        }
 
-        res.send(myFile);
+        res.redirect("/assignment/index.html#/user/"+userId+"/website/"+websiteId+"/page/"+pageId+"/widget/"+widgetId);
     }
 
 
@@ -40,6 +50,27 @@ module.exports = function (app) {
     app.get("/api/widget/:widgetId", findWidgetById);
     app.put("/api/widget/:widgetId", updateWidget);
     app.delete("/api/widget/:widgetId", deleteWidget);
+    app.put( "/api/page/:pageId/widget?", updateWidgetsSortable);
+    
+    function updateWidgetsSortable(req, res) {
+        var start = req.query.initial;
+        var end = req.query.final;
+        var pageId = req.params.pageId;
+        var p1  = getIndex(pageId,start);
+        var p2 = getIndex(pageId,end);
+        widgets.splice(p2, 0, widgets.splice(p1, 1)[0]);
+        res.sendStatus(200);
+    }
+
+    function getIndex(pageId,ind){
+        var res = [];
+        for(var i=0;i<widgets.length;i++) {
+                if(pageId == widgets[i].pageId){
+                        res.push(i);
+                    }
+            }
+        return res[ind];
+    }
 
     function findAllWidgetsForPage(req, res) {
         var pageId = req.params.pageId;

@@ -10,10 +10,21 @@
             findWidgetsByPageId: findWidgetsByPageId,
             findWidgetById: findWidgetById,
             updateWidget: updateWidget,
-            deleteWidget: deleteWidget
+            deleteWidget: deleteWidget,
+            sortable: sortable
         };
 
         return api;
+
+        function sortable(start, end, pageId) {
+            // var url = "/api/widgets?start=START&end=END";
+            var url = "/api/page/"+pageId+"/widget?initial=index1&final=index2";
+            url = url
+                .replace("index1", start)
+                .replace("index2", end);
+
+            return $http.put(url);
+        }
 
         function createWidget(pageId, widget)  {
             var url = "/api/page/" + pageId + "/widget";
