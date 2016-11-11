@@ -10,9 +10,10 @@ var t = 0.0;
 
 function setup() {
     canvas = createCanvas(windowWidth, windowHeight);
-    canvas.position(0, 0);
-    canvas.style("z-index", "-1");
-    for (var i = 0; i < 1000; i++) {
+    canvas.parent("#space-wrap");
+    canvas.style("z-index", "-2");
+
+    for (var i = 0; i < 200; i++) {
         stars[i] = new Star();
     }
     elt = document.getElementById("gargoyle");
