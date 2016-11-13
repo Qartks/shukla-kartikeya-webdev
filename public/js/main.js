@@ -52,6 +52,11 @@ function main() {
 
         });
 
+        function initParallax() {
+            $('.parallax').parallax("100%", 0.3);
+        }
+        initParallax();
+
 
     })();
 }
