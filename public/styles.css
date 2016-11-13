@@ -1,5 +1,12 @@
+html {
+    overflow: hidden;
+}
+
+body {
+    overflow: auto;
+}
+
 html, body {
-    /*font-family: 'Roboto', sans-serif;*/
     font-family: 'EB Garamond', serif;
     color: ivory;!important;
     text-rendering: optimizeLegibility !important;
@@ -7,6 +14,23 @@ html, body {
     width: 100% !important;
     height: 100% !important;
 }
+
+.my-panel {
+    transition: all 1s ease-out;
+    opacity: 0;
+}
+
+.my-panel.fade-in {
+    opacity: 1;
+}
+
+#content-wrapper {
+    height: 100%;
+    width: 100%;
+}
+
+/* Nav */
+
 
 /* Intro - Landing */
 #intro {
@@ -16,12 +40,12 @@ html, body {
     padding: 100px 0;
     text-align: center;
     color: #fff;
-    /*#022018*/
-    background: linear-gradient(135deg, #343a33, #02221a, #000A00, #000A00, #02221a, #343a33);
+    background: -webkit-linear-gradient(135deg, #343a33, #02221a, #000A00, #000A00, #02221a, #343a33);
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
+    /*z-index: -99;*/
 }
 
 #intro .intro-body {
@@ -49,12 +73,78 @@ html, body {
     }
 }
 
+/* About Me */
+
+#about {
+    font-family: 'Roboto', sans-serif;
+    display: table;
+    height: inherit;
+    position: relative;
+    background: linear-gradient(to bottom, #723161 0%, #632c2d 100%);
+    padding: 60px 0;
+    width: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+
+}
+
+div.about-body {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.arrow-img {
+    background: transparent;
+    border: 0;
+    -webkit-box-shadow: 0 0 0 0 black;
+    -moz-box-shadow: 0 0 0 0 black;
+    box-shadow: 0 0 0 0 black;
+}
+.me-img {
+    background: transparent;
+    border: 0;
+    -webkit-box-shadow: 0 0 0;
+}
+
+/* Social */
+
+#social {
+    display: table;
+    height: inherit;
+    font-family: 'Roboto', sans-serif;
+    background: -webkit-linear-gradient(top, #31725f 0%, #2c4c63 100%);
+    width: 100%;
+    text-align: center;
+    color: tomato;
+    padding: 100px 0;
+}
+
+div.social-body {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#social div li {
+    display: inline-block;
+    margin: 0 20px;
+}
+#social i.fa {
+    font-size: 24px;
+    padding-top: 8px;
+    color: tomato;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
 /* Footer */
 
 #footer {
+    font-family: 'Roboto', sans-serif;
     background: #36363a;
     color: #777;
-    padding: 20px 0;
+    padding: 65px 0;
     text-align: center;
 }
 #footer span {
@@ -62,7 +152,7 @@ html, body {
 }
 
 #footer p {
-    font-size: 13px;
+    font-size: 11px;
     margin-top: 10px;
 }
 
