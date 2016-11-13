@@ -25,10 +25,24 @@
     <link href="styles.css" rel="stylesheet"/>
 
     <!--Velocity-->
-    <script src="Js/velocity.min.js"></script>
+    <script src="js/vendor/velocity.min.js"></script>
 </head>
 
 <body>
+
+    <div id="preloader">
+        <div id="status"> <img src="assets/loading.gif" height="" width="64" alt=""> </div>
+    </div>
+
+    <nav>
+        <ul>
+            <li><a class="page-scroll" href="#intro"><span class="nav-dot"></span><span class="nav-label">Intro</span></a></li>
+            <li><a class="page-scroll" href="#about"><span class="nav-dot"></span><span class="nav-label">About</span></a></li>
+            <li><a class="page-scroll" href="#work"><span class="nav-dot"></span><span class="nav-label">Work</span></a></li>
+            <li><a class="page-scroll" href="#projects"><span class="nav-dot"></span><span class="nav-label">Projects</span></a></li>
+            <li><a class="page-scroll" href="#social"><span class="nav-dot"></span><span class="nav-label">Connect</span></a></li>
+        </ul>
+    </nav>
 
     <div id="content-wrapper">
 
@@ -45,6 +59,10 @@
             </div>
         </div>
 
+        <div>
+            Hello
+        </div>
+
 
         <div id="about">
             <div class="about-body">
@@ -54,14 +72,30 @@
                     </div>
                     <div>
                         <div class="col-xs-6 col-md-6 col-lg-6">
-                            <img src="this_guy.png" alt="..." class="img-thumbnail arrow-img">
+                            <img src="assets/this_guy.png" alt="..." class="img-thumbnail arrow-img">
                         </div>
                         <div class="col-xs-6 col-md-6 col-lg-6">
-                            <img src="me.jpg" alt="..." class="img-thumbnail me-img">
+                            <img src="assets/me.jpg" alt="..." class="img-thumbnail me-img">
                         </div>
                     </div>
                 </div>
                 </div>
+        </div>
+
+        <div id="work">
+            <div class="work-body">
+                <div class="container my-panel">
+                    <h3 class="work-header">My Work</h3>
+                </div>
+            </div>
+        </div>
+
+        <div id="projects">
+            <div class="project-body">
+                <div class="container my-panel">
+                    <h3 class="project-header">Projects</h3>
+                </div>
+            </div>
         </div>
 
         <div id="social">
@@ -101,8 +135,8 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/debug.addIndicators.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/animation.gsap.js"></script>
-    <script src="Js/jquery.js"></script>
-    <!--<script type="text/javascript" src="Js/SmoothScroll.js"></script>-->
+    <script src="js/main.js"></script>
+    <!--<script type="text/javascript" src="js/SmoothScroll.js"></script>-->
     <!--<script type="text/javascript" src="js/jquery.parallax.js"></script>-->
 </body>
 </html>
