@@ -205,8 +205,10 @@ div.about-body {
 }
 .me-img {
     background: transparent;
-    border: 0;
-    -webkit-box-shadow: 0 0 0;
+    border: 0.5px;
+    box-shadow: 1px 0 1px 0 aliceblue;
+    width : 200px;
+    height : 230px;
 }
 
 .about-title {
@@ -218,12 +220,26 @@ div.about-body {
     display: none;
     opacity: 0;
     transition: all 1s ease-out;
+    align-content: center;
 }
 
 .about-content.reveal {
     display: inherit;
 }
 
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th , .table>thead>tr>th{
+    border-top: 0px;
+    border-bottom: 0px;
+}
+
+.center {
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.this-guy {
+    font-family: 'Indie Flower', cursive;
+}
 
 /* Work */
 
@@ -246,6 +262,8 @@ div.work-body {
 .job {
     font-size: 16px;
     text-align: justify;
+    padding-left: 2%;
+    padding-right: 4%;
 }
 
 .work-title {
@@ -264,7 +282,32 @@ div.work-body {
     display: inherit;
 }
 
+.company-logo {
+    margin-left: 7px;
+}
 
+.resume-btn {
+    border: 1px;
+    border-color: aliceblue;
+    background: transparent;
+}
+
+a.btn.resume-btn {
+    color: aliceblue;
+    background: rgba(0,0,0,0);
+    border: solid 2px aliceblue;
+    border-radius: 0px;
+}
+a.btn.resume-btn:hover,
+a.btn.resume-btn.hover {
+    border-color: #bbbbbb;
+    color: gainsboro;
+}
+a.btn.resume-btn:active,
+a.btn.resume-btn.active {
+    border-color: tomato;
+    color: deeppink;
+}
 
 /* Projects */
 

@@ -82,7 +82,8 @@ function main() {
                         content
                             .toggleClass('reveal')
                             .velocity( { opacity: 1 }, { duration: 500 }, "easeInSine");
-                    });
+                    })
+                        .velocity("scroll", 800);
                 } else {
 
                     title
@@ -95,7 +96,8 @@ function main() {
                         } },  "easeOutSine" );
 
                     function Temp() {
-                        $(parent).animateAuto("both", 800);
+                        $(parent).animateAuto("both", 800)
+                                .velocity('scroll', 300);
                     }
 
 
