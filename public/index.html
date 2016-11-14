@@ -8,17 +8,21 @@
     <!--Fonts-->
     <link href="https://fonts.googleapis.com/css?family=Roboto:500" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=EB+Garamond" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&effect=3d" rel="stylesheet">
 
     <!--Jquery-->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!--<script src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js"></script>-->
 
     <!--Bootstrap-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
+    <!--FontAwesome-->
     <script src="https://use.fontawesome.com/74e0209650.js"></script>
 
     <!--StyleSheet-->
@@ -26,6 +30,24 @@
 
     <!--Velocity-->
     <script src="js/vendor/velocity.min.js"></script>
+
+    <!--ScrollMagic-->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/debug.addIndicators.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/animation.gsap.js"></script>
+
+    <!--Smooth Scroll-->
+    <!--<script src="js/vendor/SmoothScroll.js"></script>-->
+
+    <!--JQuery Parallax-->
+    <script src="js/vendor/jquery.parallax.js"></script>
+
+    <!--P5js-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.4/p5.min.js"></script>-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.4/addons/p5.dom.min.js"></script>-->
+    <!--<script src="js/particles.js"></script>-->
+
 </head>
 
 <body>
@@ -44,32 +66,33 @@
         </ul>
     </nav>
 
-    <div id="content-wrapper">
-
-        <div id="intro">
-            <div class="intro-body">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-10 col-md-offset-1" id="my-header">
-                            <h1>Kartikeya's Work</h1>
-                            <p class="intro-text"> Or the lack thereof !! </p>
-                        </div>
+    <section id="intro">
+        <div class="intro-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1" id="my-header">
+                        <h1 class="">Kartikeya's Work</h1>
+                        <p class="intro-text"> Or the lack thereof !! </p>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
+
+    <div id="content-wrapper">
 
         <div class="parallax" >
 
         </div>
 
-        <div id="about">
+        <section id="about">
             <div class="about-body">
                 <div class="container my-panel">
-                    <div class="section-title">
+                    <div class="about-title text-center">
                         <h2>Who am I ?</h2>
+                        <hr>
                     </div>
-                    <div>
+                    <div class="about-content">
                         <div class="col-xs-6 col-md-6 col-lg-6">
                             <img src="assets/this_guy.png" alt="..." class="img-thumbnail arrow-img">
                         </div>
@@ -79,19 +102,21 @@
                     </div>
                 </div>
                 </div>
-        </div>
+        </section>
 
 
         <div class="parallax" >
 
         </div>
 
-        <div id="work">
+        <section id="work">
             <div class="work-body">
                 <div class="container my-panel">
-                    <h3 class="work-header text-center">Work Experience</h3>
-                    <hr>
-                    <div class="row">
+                    <div class="work-title text-center">
+                        <h2>Work Experience</h2>
+                        <hr>
+                    </div>
+                    <div class="row work-content">
                         <div class="col-md-3 col-sm-6 col-lg-12">
                             <div class="job">
                                 <h3>Nvidia</h3>
@@ -118,44 +143,71 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
         <div class="parallax" >
 
         </div>
 
-        <div id="projects">
+        <section id="projects">
             <div class="project-body">
-                <div class="container my-panel text-center">
-                    <h3 class="project-header">Projects</h3>
-                    <hr>
-                    <div class="row">
-                        <div class="categories">
-                            <ul class="cat">
-                                <li>
-                                    <ol class="type">
-                                        <li><a href="#" data-filter="*" class="active">All</a></li>
-                                        <li><a href="#" data-filter=".neu">NEU</a></li>
-                                        <li><a href="#" data-filter=".personal">Personal</a></li>
-                                        <li><a href="#" data-filter=".jaypee">JP</a></li>
-                                    </ol>
-                                </li>
-                            </ul>
+                <div class="container my-panel">
+                    <div class="projects-title text-center">
+                        <h2>Projects</h2>
+                        <hr>
+                    </div>
+
+                    <div class="projects-content">
+                        <div class="row">
+                            <div class="categories">
+                                <ul class="cat">
+                                    <li>
+                                        <ol class="type">
+                                            <li><a href="#" data-filter="*" class="active">All</a></li>
+                                            <li><a href="#" data-filter=".neu">NEU</a></li>
+                                            <li><a href="#" data-filter=".personal">Personal</a></li>
+                                            <li><a href="#" data-filter=".jaypee">JP</a></li>
+                                        </ol>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="project-items">
+                                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                                    <div class="project-item">
+                                        <h4>Project Title</h4>
+                                        <p>Web Design</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
                 </div>
             </div>
-        </div>
+        </section>
 
         <div class="parallax" >
 
         </div>
 
-        <div id="social">
+        <section id="social">
             <div class="social-body">
                 <div class="container my-panel">
-                    <h3 class="social-header text-center">Follow Me</h3>
-                    <div>
+                    <div class="social-title text-center">
+                        <div class="card">
+                            <div class="front">
+                                <h2>Follow</h2>
+                                <hr>
+                            </div>
+                            <!--<div class="back">-->
+                                <!--<h2>Follow 2</h2>-->
+                                <!--<hr>-->
+                            <!--</div>-->
+                        </div>
+                    </div>
+                    <div class="social-content">
                         <li><a href="https://www.facebook.com/kartikeya.shukla89" target="_blank"><i class="fa fa-facebook"></i></a></li>
                         <li><a href="https://www.twitter.com/qartks89" target="_blank"><i class="fa fa-twitter"></i></a></li>
                         <li><a href="https://www.github.com/qartks89" target="_blank"><i class="fa fa-github"></i></a></li>
@@ -165,13 +217,13 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div id="footer">
+        <section id="footer">
             <div class="container">
                 <p>Copyright &copy; Why are you reading this. <span> Go Away. </span> or not, I can't tell you what to do. :)</p>
             </div>
-        </div>
+        </section>
 
     </div>
 
@@ -185,13 +237,6 @@
     <!--</div>-->
 
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/debug.addIndicators.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/animation.gsap.js"></script>
-    <script src="js/vendor/jquery.parallax.js"></script>
     <script src="js/main.js"></script>
-    <!--<script type="text/javascript" src="js/SmoothScroll.js"></script>-->
-    <!--<script type="text/javascript" src="js/jquery.parallax.js"></script>-->
 </body>
 </html>
