@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>Particle Systems</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../../mywork/css/styles.css" rel="stylesheet"/>
+</head>
+
+<body>
+<div class="container">
+    <header>
+        <div class="page-header">
+            <h1><strong>Understanding and Building Particle Systems</strong></h1>
+            <h3> Kartikeya Shukla
+                <small>CS5310 - Computer Graphics</small>
+            </h3>
+        </div>
+    </header>
+
+    <div>
+        <ol>
+            <div>
+                <li><strong>Introduction:</strong>
+                    <p>In 1982, William T. Reeves, a researcher at Lucasfilm Ltd., was working on the film <em>Star
+                        Trek II: The Wrath of
+                        Khan</em>. Much of the movie revolves
+                        around the Genesis Device, a torpedo that when shot at a barren, lifeless planet has the ability
+                        to reorganize
+                        matter and create a habitable world for
+                        colonization. During the sequence, a wall of fire ripples over the planet while it is being
+                        'terraformed'. The term
+                        <strong><em>particle system</em></strong>, an incredibly common and useful technique in computer
+                        graphics, was
+                        coined in the creation of this particular
+                        effect.
+                    </p>
+                    <p>
+                        <em>
+                            "A particle system is a collection of many many minute particles that together represent a
+                            fuzzy object. Over a
+                            period of time, particles are generated
+                            into a system, move and change from within the system, and die from the system."
+                        </em>
+                    </p>
+                    <p>
+                        This type of effect is commonly replicated and re-produced using particle systems in games,
+                        graphics, movies etc.
+                        Examples of such effects include fire,
+                        rain, snow, sand, waterfalls, stars, galaxies, etc.
+                    </p>
+                    <p>
+                        Particle system can also be used to depict hair or fur, by rendering the entire lifetime of a
+                        single particle at
+                        once, which can be manipulated as per the
+                        interaction with the environment.
+                    </p>
+                </li>
+            </div>
+            <div>
+                <li><strong>Building a simple Particle System:</strong></li>
+                <p>
+                    From the definition mentioned above, it is easy to tell that a particle system is just a
+                    container of individual
+                    independent elements, which have their own
+                    properties/attributes and each interact with their environment, and as a whole produce a desired
+                    effect. This
+                    behavior can be reproduced quite easily via
+                    code using Object Oriented Programming principles.
+                </p>
+                <p>
+                    We intend to demonstrate the creation of a simple particle system using Processing.
+                </p>
+                <p>
+                    Our goal is to make a particle system container, a class, which when called would display a
+                    screen full of
+                    particles, without the need of directly
+                    referencing/initializing any individual particles.
+                </p>
+                <ul>
+                    <li><em>A single particle</em></li>
+                    <p>
+                        First, we will try and describe a single particle. What would it look like? What are its basic
+                        attributes? And then
+                        wrap them into a single component, a class.
+                    </p>
+<pre>
+class Particle {
+  PVector location;                     // Vector storing the location of the particle
+  PVector velocity;                     // Vector stores velocity
+  PVector acceleration;                 // Vector stores acceleration
+  Float lifespan;                       // The duration that the particle ‘lives’
+
+  Particle(PVector l) {
+    location = l.get();                                     //Stores x and y co-ordinates when particle is initialized
+    velocity = new PVector(random(-1,1), random(-2, 0));    // Particle will either go left or right and upward direction.
+    acceleration = new PVector(0, 0.02);                    // Will have a downward acceleration (gravity)
+    lifespan = 255;                                         // Can be chosen as per required effect
+  }
+
+  void update() {
+    velocity.add(acceleration);
+    location.add(velocity);             // Here the velocity and acceleration change the location of // this particle
+    lifespan -= 2.0;                    // each time the particle is updated it ‘grows older’
+  }
+
+  void display() {
+    stroke(0);
+    fill(175);
+    ellipse(location.x,location.y,8,8);         // For now we consider our particle as a circle
+  }
+}</pre>
+                    <li><em>ArrayList and Iterator Class</em></li>
+<pre>
+ArrayList&lt;Particle&gt; particles;
+
+void setup() {
+  size(640,360);
+  particles = new ArrayList&lt;Particle&gt;();
+}
+
+void draw() {
+  background(255);
+
+  particles.add(new Particle(new PVector(width/2,50)));
+
+  Iterator&lt;Particle&gt; it = particles.iterator();
+  //[full] Using an Iterator object instead of counting with int i
+  while (it.hasNext()) {
+    Particle p = it.next();
+    p.run();
+    if (p.isDead()) {
+       it.remove();
+    }
+  }
+}
+</pre>
+                    <video width="400" height="300" controls align="center">
+                        <source src="../../../mywork/images/multiple_particles.mp4" type="video/mp4"/>
+                        Your browser does not support the video tag.
+                    </video>
+                    <p>
+                        That was a single particle, but we need our code to organize the data to accommodate many many
+                        such particles. One
+                        way of doing this is using the ArrayList
+                        - we can simply add a particle with every call to draw().
+                    </p>
+                    <p>
+                        Another thing to note is the isDead() function - if we were to keep adding particles to the
+                        system, after a while we
+                        would see the frame rate slow down and
+                        eventually seemingly halts because of the sheer number of particles. Here, the remove() function
+                        of the ArrayList is
+                        extremely useful i.e. remove the
+                        particle whose lifeSpan has elapsed.
+                    </p>
+                    <p>
+                        We can also look at using the Iterator class to loop through the particles making sure each
+                        particle is updated
+                        correctly.
+                    </p>
+                    <li><em>Encapsulate it all into a Class</em></li>
+<pre>
+class ParticleSystem {
+  ArrayList particles;
+  // This particular ParticleSystem implementation
+  // includes an origin point where each Particle begins.
+  PVector origin;
+
+  ParticleSystem(PVector location) {
+    origin = location.get();
+    particles = new ArrayList();
+  }
+
+  void addParticle() {
+    // The origin is passed to each Particle when it is added.
+    particles.add(new Particle(origin));
+  }</pre>
+                    <li><em>Applying a Force</em></li>
+                    <p>
+                        Now that we have a simple Particle system built, we would also like it to react to external
+                        forces. We do this by
+                        looping through the list of particles
+                        applying the force on each one.
+                    </p>
+<pre>
+Void applyForce( Pvector force) {
+   For(Particle p : particles){
+    p.applyForce(f);
+    }
+}</pre>
+                    <p>
+                        And within the particle , in accordance to Newton's law of motion, update the acceleration using
+                        the mass (For now
+                        consider, mass = 1, randomize this to
+                        achieve different results).
+                    </p>
+<pre>
+Void applyForce(PVector force){
+   PVector f = new force.get();
+   f.div(mass); // consider the mass = 1 for a particle, can be changed for
+                // different results
+   acceleration.add(f);
+}
+</pre>
+                    <li><em>Adding Texture </em></li>
+                    <p>
+                        Adding a simple texture such as the one below, with appropriate color (tint), our system looks
+                        like smoke or fire.
+                    </p>
+                    <p align="center">
+                        <img width="100" height="102" src="../../../mywork/images/texture.png">
+                    </p>
+                    <p>
+                        Add the following statement for additive blending, which combines a certain percentage pixels
+                        from the background to
+                        the foreground depending on the alpha
+                        values.
+                    </p>
+                </ul>
+            </div>
+            <div>
+                <li><strong>Discussions:</strong></li>
+                <p>
+                    In the previous section, we saw a working Particle System capable of reproducing recognizable
+                    special effects;
+                    albeit quite simple looking effects but
+                    special effects nonetheless.
+                </p>
+                <p>
+                    This is one of the main impetus of this paper that the myriads of complex systems that we are used
+                    to seeing in
+                    various 3d softwares are inherently built
+                    on something very basic and easy to understand. If one were to sit down and expand the workings of
+                    our particle
+                    system by including things such as
+                    interactions between particles, evolution of particles (with time or environment), dynamic stimuli
+                    etc. it would
+                    more realistically depict the systems that
+                    are used in the industry.
+                </p>
+                <p>
+                    We also highly recommend the use of artist friendly 3d softwares like Maya and Houdini, to
+                    experience the extent
+                    of
+                    sophistication to which one can take a
+                    particle system.
+                </p>
+                <p>
+                    Particle systems can be created and modified natively in many 3D modeling and rendering packages
+                    including
+                    Cinema
+                    4D, Lightwave, Houdini, Maya, XSI, 3D
+                    Studio Max and Blender.
+                </p>
+                <ul>
+                    <li>Using the simple particle system an example of camp-fire</li>
+                    <video width="600" height="400" controls>
+                        <source src="../../../mywork/images/fire_system.mp4" type="video/mp4"/>
+                        Your browser does not support the video tag.
+                    </video>
+                    <li>Following is a video showing how we can re-create simple particle systems by enhacing the system
+                        we
+                        created
+                        <ul>
+                            <li> Snow - 1:55</li>
+                            <li> Fireball - 2:44</li>
+                            <li> Sun (with Corona) - 3:08</li>
+                            <li> Particle behaving like rigid bodies - 3:35</li>
+                        </ul>
+                    </li>
+                    <video width="600" height="400" controls>
+                        <source src="../../../mywork/images/ParticleSystem.mp4" type="video/mp4"/>
+                        Your browser does not support the video tag.
+                    </video>
+                </ul>
+
+                <li><strong>Reference:</strong></li>
+                <ol>
+                    <li>Nature Of Code – Daniel Shiffman <a href="http://natureofcode.com/">http://natureofcode.com/</a>
+                    </li>
+                    <li>Build New Games - <a href="http://buildnewgames.com/particle-systems/">http://buildnewgames.com/particle-systems/</a>
+                    </li>
+                    <li>Particle Systems - <a href="http://en.wikipedia.org/wiki/Particle_system">http://en.wikipedia.org/wiki/Particle_system</a>
+                    </li>
+                    <li>William Reeves, "Particle Systems - A Technique for Modeling a Class of Fuzzy Objects," ACM
+                        Transactions on
+                        Graphics<em> 2:2 (April 1983), 92.</em></li>
+                    <li>Processing - <a href="http://processing.org">http://processing.org</a>/</li>
+                </ol>
+            </div>
+        </ol>
+    </div>
+</div>
+</body>
+
+</html>

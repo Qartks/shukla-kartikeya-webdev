@@ -1,9 +1,48 @@
-html {
-    overflow-style: move;
-}
+/*html, body, div, span, applet, object, iframe,*/
+/*h1, h2, h3, h4, h5, h6, p, blockquote, pre,*/
+/*a, abbr, acronym, address, big, cite, code,*/
+/*del, dfn, em, img, ins, kbd, q, s, samp,*/
+/*small, strike, strong, sub, sup, tt, var,*/
+/*b, u, i, center,*/
+/*dl, dt, dd, ol, ul, li,*/
+/*fieldset, form, label, legend,*/
+/*table, caption, tbody, tfoot, thead, tr, th, td,*/
+/*article, aside, canvas, details, embed,*/
+/*figure, figcaption, footer, header, hgroup,*/
+/*menu, nav, output, ruby, section, summary,*/
+/*time, mark, audio, video {*/
+    /*margin: 0;*/
+    /*padding: 0;*/
+    /*border: 0;*/
+    /*font-size: 100%;*/
+    /*font: inherit;*/
+    /*vertical-align: baseline;*/
+/*}*/
+/*!* HTML5 display-role reset for older browsers *!*/
+/*article, aside, details, figcaption, figure,*/
+/*footer, header, hgroup, menu, nav, section {*/
+    /*display: block;*/
+/*}*/
+/*body {*/
+    /*line-height: 1;*/
+/*}*/
+/*ol, ul {*/
+    /*list-style: none;*/
+/*}*/
+/*blockquote, q {*/
+    /*quotes: none;*/
+/*}*/
+/*blockquote:before, blockquote:after,*/
+/*q:before, q:after {*/
+    /*content: '';*/
+    /*content: none;*/
+/*}*/
+/*table {*/
+    /*border-collapse: collapse;*/
+    /*border-spacing: 0;*/
+/*}*/
 
-body {
-}
+
 
 html, body {
     font-family: 'EB Garamond', serif;
@@ -13,7 +52,26 @@ html, body {
     width: 100% !important;
     height: 100% !important;
     background: #262626;
+}
 
+html {
+    position: relative;
+}
+
+body {
+    position: absolute;
+    overflow-y: scroll;
+}
+
+
+ul {
+    padding-left: 10px;
+}
+
+@media only screen and (min-width: 768px) {
+    ul {
+        padding-left: 40px;
+    }
 }
 
 .my-panel {
@@ -101,6 +159,7 @@ nav ul {
 }
 
 nav li {
+    font-family: 'Roboto Condensed', sans-serif;
     font-size: 16px;
     width: auto;
     list-style: none;
@@ -166,7 +225,7 @@ nav li {
 
 /* Parallax */
 .parallax {
-    display: none;
+    /*display: none;*/
     padding: 100px 0;
     background: url(assets/services-bg.jpg);
     background-size: cover;
@@ -241,6 +300,17 @@ div.about-body {
     font-family: 'Indie Flower', cursive;
 }
 
+.table {
+    font-size: 13px;
+}
+
+@media(min-width:768px) {
+    .table {
+        font-size: 18px;
+    }
+}
+
+
 /* Work */
 
 #work {
@@ -260,10 +330,24 @@ div.work-body {
 }
 
 .job {
-    font-size: 16px;
+    font-size: 13px;
     text-align: justify;
     padding-left: 2%;
     padding-right: 4%;
+}
+
+.job h3 {
+    font-size: 18px;
+}
+
+@media(min-width:768px) {
+    .job {
+        font-size: 16.5px;
+    }
+
+    .job h3{
+
+    }
 }
 
 .work-title {
@@ -314,7 +398,7 @@ a.btn.resume-btn.active {
 #projects {
     display: table;
     height: inherit;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
     /*background: #31725f;*/
     /*background: -webkit-gradient(left top, left bottom, color-stop(0%, #31725f), color-stop(100%, #2c4c63));*/
     /*background: -webkit-linear-gradient(top, #31725f 0%, #2c4c63 100%);*/
@@ -327,22 +411,6 @@ a.btn.resume-btn.active {
 
 div.project-body {
     display: table-cell;
-    vertical-align: middle;
-}
-
-.categories {
-    padding-bottom: 30px;
-}
-ul.cat li {
-    display: inline-block;
-}
-ol.type li {
-    display: inline-block;
-    margin-left: 20px;
-}
-
-ul.cat:first-child, ol.type:first-child {
-    padding-left: 0;
 }
 
 .projects-title {
@@ -364,13 +432,140 @@ ul.cat:first-child, ol.type:first-child {
     display: inherit;
 }
 
+.project-item {
+    font-size: 15px;
+    text-align: justify;
+    padding-left: 2%;
+    padding-right: 4%;
+}
+
+.project-item h3 {
+    font-size: 18px;
+}
+
+@media(min-width:768px) {
+    .project-item {
+        font-size: 16.5px;
+    }
+
+    .project-item h3{
+
+    }
+}
+
+.project-details {
+
+}
+
+@media(min-width:768px) {
+    .project-item {
+        text-align: justify;
+    }
+}
+
+
+/* ****************************** */
+
+a, a:hover, a:active, a:visited {
+    text-decoration:none;
+}
+
+a.active, a.active:hover, a.active:active, a.active:visited {
+    text-decoration:none;
+}
+
+div.categories {
+    padding-bottom: 30px;
+    text-align: center;
+}
+ul.cat li {
+    text-align: center;
+    display: inline-block;
+}
+ol.type li {
+    text-align: center;
+    display: inline-block;
+    margin-left: 20px;
+}
+
+ol.type {
+    padding-left: 0px;
+}
+
+ol.type li a {
+    color: #262626;
+    padding: 8px 16px;
+    border: 1px solid #262626;
+    border-radius: 0px;
+}
+ol.type li a.active {
+    color: aliceblue;
+    background: #262626;
+}
+ol.type li a:hover {
+    background: aliceblue;
+    border-color: tomato;
+    color: deeppink;
+}
+
+ol.type li a.active:visited {
+    text-decoration: none;
+}
+
+.isotope-item {
+    z-index: 2
+}
+.isotope-hidden.isotope-item {
+    z-index: 1
+}
+.isotope, .isotope .isotope-item {
+    -webkit-transition-duration: 0.8s;
+    -moz-transition-duration: 0.8s;
+    transition-duration: 0.8s;
+}
+.isotope-item {
+    margin-right: -1px;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+.isotope {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transition-property: height, width;
+    -moz-transition-property: height, width;
+    transition-property: height, width;
+}
+.isotope .isotope-item {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transition-property: -webkit-transform, opacity;
+    -moz-transition-property: -moz-transform, opacity;
+    transition-property: transform, opacity;
+}
+
+
+/* ****************************** */
+
 
 /* Social */
+
+#webdev {
+    display: table;
+    height: auto;
+    font-family: 'Roboto Condensed', sans-serif;
+    background: #31725f;
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, #31725f), color-stop(100%, #2c4c63));
+    background: -webkit-linear-gradient(top, #31725f 0%, #2c4c63 100%);
+    background: linear-gradient(to bottom, #31725f 0%, #2c4c63 100%);
+    width: 100%;
+    text-align: center;
+    padding: 100px 0;
+}
 
 #social {
     display: table;
     height: inherit;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
     background: #EECDA3;
     background: -webkit-linear-gradient(to left, #EECDA3 , #EF629F);
     background: linear-gradient(to left, #EECDA3 , #EF629F);
@@ -450,12 +645,6 @@ div.social-body {
 }
 
 /* Misc */
-
-.list-group-item {
-    border: none;
-    border-radius: 0px;
-    background: transparent;
-}
 
 #particle-system {
     overflow: auto;

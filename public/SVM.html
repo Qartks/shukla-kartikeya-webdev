@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>SVM</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../../mywork/css/styles.css" rel="stylesheet"/>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="page-header">
+                <h1><strong>Understanding Support Vector Machines and its application in Feature Detection</strong></h1>
+                <h3> Kartikeya Shukla
+                    <small>CS5310 - Computer Graphics</small>
+                </h3>
+            </div>
+        </header>
+
+        <ol>
+            <div><li><strong>Abstract</strong></li>
+                <p>
+                    In machine learning quite often, one encounters decision making scenarios wherein prior knowledge is used to analyze unknown data to arrive at logical
+                    conclusions. This study explores one such learning technique to analyze a set of inputs to predict the outcomes with the help of a learning model, Support
+                    Vector Machine. A study of the technique was followed by implementation, using R.
+                </p>
+            </div>
+            <div><li><strong>Introduction</strong></li>
+                <p>
+                    Support vector machines (SVM) are learning models which are primarily used in machine learning to solve classification problems. A typical SVM
+                    implementation consists of a training phase followed by a prediction phase.
+                </p>
+                <p>
+                    Typically, the training data is classified to belong to one of the categories (classes) a using a training algorithm (i.e. a supervised learning model) an
+                    SVM can be trained to recognize patterns belonging to a certain class and it can then be used to predict new data which belongs to one of the classes.
+                </p>
+                <p>
+                    An SVM model can be represented as points in space. The training data can be mapped into a multi-dimensional coordinate system where points belonging a
+                    specific classification are separated from the others. A separation can be as simple as a line in 2d space and as complex a nonlinear kernel which could to
+                    operate in a higher dimensional space. Clear separation of points representing classifications results in better and precise predictions.
+                </p>
+                <p>
+                    A few common application of SVM include classifying protein structures in medicinal biology, recognizing hand written characters and classification of
+                    images.
+                </p>
+            </div>
+            <div><li><strong>Material and Methods</strong></li>
+                <p>
+                    In this study, R programming language along with the SVM (package e1071) was utilized to construct several SVM models.
+                </p>
+                <ul>
+                    <li>A simple SVM model was constructed to classify numbers into odd or even categories.</li>
+                    <li>A slightly more sophisticated model was constructed to classify Breast cancer tumors into either malignant or benign using data from the UCI database. These datasets were purely numerical.</li>
+                    <li>SVM models to analyze image data were also constructed i.e. classifying images to have a right diagonal/left diagonal and hexagon/pentagon images.</li>
+                    <li>To illustrate feature detection, an SVM model to analyze images of human faces was constructed to classify them into either faces with eye-glasses or faces without eye-glasses.</li>
+                </ul>
+            </div>
+            <div><li><strong>Results</strong></li>
+                <ul>
+                    <li>TP: true positive, i.e. C2 instances predicted rightly</li>
+                    <li>FP: false positive, i.e. C1 instances predicted as C2</li>
+                    <li>TN: true negative, i.e. C1 instances predicted rightly</li>
+                    <li>|N|: total of C1 instances</li>
+                    <li>|P|: total of C2 instances</li>
+                </ul>
+                <div align="center">
+                    <br>
+                    <img width="470" height="37" src="../../../mywork/images/svm1.png"/>
+                    <hr><br>
+                    <img width="464" height="232" src="../../../mywork/images/svm2.png"/>
+                    <hr><br>
+                    <p>|__________Figure 1_______________|___________ Figure 2_____________|</p>
+
+                    <div class="alert alert-warning" role="alert"> 
+                        Figure 1, shows the sample image inputs and the corresponding prediction table. In this case a very accurate prediction occurred. <br> However, in Figure 2, Pentagons were classified correctly but the hexagons were also classified as pentagons which indicates that the SVM module requires more training data.
+                    </div>
+                    <img width="233" height="334" src="../../../mywork/images/svm3.png"/>
+                    <img width="233" height="334" src="../../../mywork/images/svm4.png"/>
+                    <p >|__________Figure 3_______________|___________ Figure 4_____________|</p>
+                    <div class="alert alert-warning" role="alert"> 
+                        Figures 3 and 4 are the results of analyzing Cancerous Tumors. Figure 3 shows the predictions and performance of a SVM Model where the entire data set was divided into training set and test set in 1 : 1 ratio
+                        Figure 4 shows the results for the same data set divided into training and test sets 7: 3 ratio.
+                        The SVM efficiency increases with more training data.
+                    </div>
+                    <img width="330" height="340" src="../../../mywork/images/svm5.png">
+                    <p >|_________*_________Figure 5_________*_________|</p>
+                    <img width="233" height="334" src="../../../mywork/images/svm6.png">
+                    <img width="233" height="334" src="../../../mywork/images/svm7.png"/>
+                    <p >|__________Figure 6_______________|___________ Figure 7_____________|</p>
+                    <div class="alert alert-warning" role="alert"> 
+                        Figures 6,7 are the results of a facial pattern analysis. A total of 300 human face image JPEGs, with 150 of them belonging to class C1 (Faces without eye glasses) and the remaining 150 belonging to class C2 (Face with eye glasses). Figure 5 is a subset of the collection of images that were used.
+                    </div>
+                </div>
+            </div>
+            <div><li><strong>Reference</strong></li>
+                <ol>
+                    <li><a href="https://geekoverdose.wordpress.com/2013/02/24/image-classification-using-svms-in-r/">
+                        <strong>https://geekoverdose.wordpress.com/2013/02/24/image-classification-using-svms-in-r/</strong>
+                    </a></li>
+                    <li><a href="http://en.wikibooks.org/wiki/Data_Mining_Algorithms_In_R/Classification/SVM">
+                        <strong>http://en.wikibooks.org/wiki/Data_Mining_Algorithms_In_R/Classification/SVM</strong>
+                    </a></li>
+                    <li><a href="http://en.wikipedia.org/wiki/Support_vector_machine"><strong>http://en.wikipedia.org/wiki/Support_vector_machine</strong></a>
+                    </li>
+                    <li><a href="http://web.mit.edu/emeyers/www/face_databases.html"><strong>http://web.mit.edu/emeyers/www/face_databases.html</strong></a></li>
+                    <li><a href="http://www.milbo.org/muct/"><strong>http://www.milbo.org/muct/</strong></a></li>
+                    <li><a href="https://rocr.bioinf.mpi-sb.mpg.de/"><strong>https://rocr.bioinf.mpi-sb.mpg.de/</strong></a></li>
+                    <li><a href="https://philipphunziker.wordpress.com/2013/03/10/supervised-image-classification-in-r-using-support-vector-machines/">
+                        <strong>https://philipphunziker.wordpress.com/2013/03/10/supervised-image-classification-in-r-using-support-vector-machines/</strong>
+                    </a></li>
+                </ol>
+            </div>
+            <div><li><strong>R source Code</strong></li>
+<pre>
+library('e1071')
+library('parallel')
+library(pROC)
+
+# Set Working direcory
+setwd(&quot;//ccis-windows/ccis/MyHome/.WIN_PROFILE/Desktop/less_images&quot;)
+
+# Extract file names
+folder&lt;-'.'
+file_list &lt;- dir(folder, pattern=&quot;jpg&quot;)
+
+data &lt;- mclapply(file_list, readJPEG, mc.cores=1)
+
+subject_ids &lt;- lapply(file_list, function(file_name) as.numeric(unlist(strsplit(file_name, &quot;_&quot;))[1]))
+
+subject_ids[subject_ids==0]='c1'
+subject_ids[subject_ids!='c1']='c2'
+img_ids &lt;- lapply(file_list, function(file_name) as.numeric(unlist(strsplit(unlist(strsplit(file_name, &quot;_&quot;))[2], &quot;\\.&quot;))[1]))
+
+# Divide data into training and test sets
+
+train_test_border &lt;- 100
+
+train_in &lt;- t(array(unlist(data[img_ids &lt; train_test_border]), dim=c(length(unlist(data[1])),sum(img_ids &lt; train_test_border))))
+
+train_out &lt;- unlist(subject_ids[img_ids &lt; train_test_border])
+test_in &lt;- t(array(unlist(data[img_ids &gt;= train_test_border]), dim=c(length(unlist(data[1])),sum(img_ids &gt;= train_test_border))))
+test_out &lt;- unlist(subject_ids[img_ids &gt;= train_test_border])
+
+# Construct the SVM Model 
+svm_model &lt;- svm(train_in, train_out ,type='C', kernel='linear' ,probability = TRUE)
+
+# Test the model
+p &lt;- predict(svm_model, test_in ,probability = TRUE)
+
+tab &lt;- table(pred = p, true = test_out)
+probB = (attributes(p)$probabilities[,1])
+probM = (attributes(p)$probabilities[,2])
+prob_Actual = pmax(probM,probB)
+l1 = as.matrix(p)[,1]
+
+# Plot pROC curve for specificity against sensitivity
+plot.roc(l1,prob_Actual)
+</pre>
+            </div>
+        </ol>
+    </div>
+</body>
+</html>

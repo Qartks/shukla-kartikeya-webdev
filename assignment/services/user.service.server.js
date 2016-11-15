@@ -1,4 +1,4 @@
-module.exports = function (app) {
+module.exports = function (app, model) {
 
     var users = [
         {_id: "123", username: "alice", password: "alice", firstName: "Alice", lastName: "Wonder", email: "alicewonder@Mhatter.com"},
@@ -17,9 +17,19 @@ module.exports = function (app) {
 
     function createUser(req, res) {
         var user = req.body;
-        user._id = (new Date()).getTime();
-        users.push(user);
-        res.send(user);
+        // user._id = (new Date()).getTime();
+        // users.push(user);
+        model
+            .userModel
+            .createUser(user)
+            .then(
+                function (newUser) {
+                    res.send(newUser);
+                },
+                function (error) {
+                    
+                }
+            );
     }
 
     function deleteUser(req, res) {
