@@ -31,7 +31,7 @@
                     if(user == "0") {
                         alert("Unable to Find");
                     } else {
-                        vm.user = user;
+                        // vm.user = user;
                     }
                 })
                 .error(function (err) {

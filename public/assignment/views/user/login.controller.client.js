@@ -15,7 +15,7 @@
            UserService.findUserByCredentials(user.username, user.password)
                 .success(function (user) {
                     if(user === "0") {
-                        vm.error = "Unable to login";
+                        vm.error = "No Such user";
                     } else {
                         $location.url("/user/" + user._id);
                     }

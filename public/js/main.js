@@ -3,7 +3,30 @@ function main() {
 
         $(window).load(function() {
 
+            var $container = $('.project-items');
+            $container.isotope({
+                filter: '*',
+                animationOptions: {
+                    duration: 750,
+                    easing: 'linear',
+                    queue: false
+                }
+            });
 
+            $('.cat a').click(function() {
+                $('.cat .active').removeClass('active');
+                $(this).addClass('active');
+                var selector = $(this).attr('data-filter');
+                $container.isotope({
+                    filter: selector,
+                    animationOptions: {
+                        duration: 750,
+                        easing: 'linear',
+                        queue: false
+                    }
+                });
+                return false;
+            });
 
         });
 
@@ -33,6 +56,9 @@ function main() {
                 .setClassToggle(this, 'fade-in')
                 .addTo(controller);
         });
+        {
+            new ScrollMagic.Scene({triggerElement: ".my-panel.is-light"}).setClassToggle("nav", "is-dark").addTo(controller);
+        }
 
 
         // *************************************************** Velocity Scrolling
@@ -44,36 +70,11 @@ function main() {
         // ***************************************************  When Document is loaded
         $(document).ready(function () {
 
-            var $container = $('.project-items');
-            $container.isotope({
-                filter: '*',
-                animationOptions: {
-                    duration: 750,
-                    easing: 'linear',
-                    queue: false
-                }
-            });
-
-            $('.cat a').click(function() {
-                $('.cat .active').removeClass('active');
-                $(this).addClass('active');
-                var selector = $(this).attr('data-filter');
-                $container.isotope({
-                    filter: selector,
-                    animationOptions: {
-                        duration: 750,
-                        easing: 'linear',
-                        queue: false
-                    }
-                });
-                return false;
-            });
-
             // ***************************************************  Hover
             // $('.about-title').hover(flip180, flip0);
             // $('.work-title').hover(flip180, flip0);
             // $('.projects-title').hover(flip180, flip0);
-            $('.social-title').hover(changeText, changeBack);
+            // $('.about-title').hover(changeText, changeBack);
 
             // *************************************************** Helper Function for Hover
             function flip180() {
@@ -88,19 +89,34 @@ function main() {
             }
 
             function changeText() {
-
+                $('.up').velocity({
+                    opacity : 0
+                });
+                $('.down')
+                    .velocity({
+                        translateY: "0%",
+                        opacity : 1
+                    });
             }
 
             function changeBack() {
-
+                $('.up').velocity({
+                    opacity: 1
+                });
+                $('.down')
+                    .velocity({
+                    translateY: "-200%",
+                    opacity : 0
+                });
             }
 
 
             // *************************************************** Reveal
-            $('.about-title').on('click', {title: ".about-title", content: ".about-content"},  DisplayContents);
-            $('.work-title').on('click', {title: ".work-title", content: ".work-content"},  DisplayContents);
-            $('.projects-title').on('click', {title: ".projects-title", content: ".projects-content"},  DisplayContents);
-            $('.social-title').on('click', {title: ".social-title", content: ".social-content"},  DisplayContents);
+            $('.about-title').on('click', {title: ".about-title", content: ".about-content", percent: "75%"},  DisplayContents);
+            $('.work-title').on('click', {title: ".work-title", content: ".work-content", percent: "100%"},  DisplayContents);
+            $('.projects-title').on('click', {title: ".projects-title", content: ".projects-content", percent: "75%"},  DisplayContents);
+            $('.social-title').on('click', {title: ".social-title", content: ".social-content", percent: "30%"},  DisplayContents);
+            $('.section-title').on('click', {title: ".section-title", content: ".section-content", percent: "50%"},  DisplayContents);
 
 
             // *************************************************** Helper Function to reveal
@@ -108,12 +124,13 @@ function main() {
 
                 var title = $(event.data.title);
                 var content = $(event.data.content);
+                var pert = event.data.percent;
                 var parent = $(this.parentElement.parentElement.parentElement);
 
                 if (content.css('display') == 'none') {
-                    $(parent).animateDiv("height", 800, "100%", function () {
-                        // title
-                        //     .velocity("fadeIn", { duration: 500 });
+
+                    $(parent).animateDiv("height", 800, pert, function () {
+
                         content
                             .toggleClass('reveal')
                             .velocity( { opacity: 1 }, { duration: 500 }, "easeInSine");
@@ -121,18 +138,15 @@ function main() {
                         .velocity("scroll", 800);
                 } else {
 
-                    // title
-                    //     .velocity("fadeOut", { duration: 500 })
-                    //     .velocity("fadeIn", { duration: 30 });
                     content
-                        .velocity( { opacity: 0 }, { duration: 800 ,  complete: function () {
+                        .velocity( { opacity: 0 }, { duration: 1000 ,  complete: function () {
                             content.toggleClass('reveal');
                             Temp();
                         } },  "easeOutSine" );
 
                     function Temp() {
-                        $(parent).animateDiv("height", 800, "auto")
-                                .velocity('scroll', 300);
+                        $(parent).animateDiv("height", 1200, "auto")
+                                // .velocity('scroll', 300);
                     }
 
 
