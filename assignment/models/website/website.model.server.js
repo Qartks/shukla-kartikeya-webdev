@@ -64,7 +64,9 @@ module.exports = function () {
                     .userModel
                     .findUserOfWebsite(websiteId)
                     .then(function (userObj) {
-                        
+                        var index = userObj.websites.indexOf(websiteId);
+                        userObj.websites.splice(index, 1);
+                        userObj.save();
                     });
                 return websiteObj;
             }, function (err) {

@@ -12,6 +12,7 @@ module.exports = function () {
         updateUser : updateUser,
         deleteUser : deleteUser,
         findAllWebsiteForUser : findAllWebsiteForUser,
+        findUserOfWebsite : findUserOfWebsite,
         setModel : setModel
     };
 
@@ -19,6 +20,10 @@ module.exports = function () {
 
     function setModel(_model) {
         model = _model;
+    }
+
+    function findUserOfWebsite(websiteId) {
+        return UserModel.findOne({websites : websiteId});
     }
 
     function findAllWebsiteForUser (userId) {
