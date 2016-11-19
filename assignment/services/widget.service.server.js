@@ -38,22 +38,14 @@ module.exports = function (app, model) {
         var start = req.query.initial;
         var end = req.query.final;
         var pageId = req.params.pageId;
-        var p1  = getIndex(pageId,start);
-        var p2 = getIndex(pageId,end);
-        widgets.splice(p2, 0, widgets.splice(p1, 1)[0]);
-        res.sendStatus(200);
-    }
+        model.widgetModel.reorderWidget(pageId, start, end)
+            .then(function (status) {
+                res.sendStatus(200);
+            }, function (err) {
+                res.sendStatus(400).send(err);
+            });
 
-    function getIndex(pageId,ind){
-        var res = [];
-        for(var i=0;i<widgets.length;i++) {
-                if(pageId == widgets[i].pageId){
-                        res.push(i);
-                    }
-            }
-        return res[ind];
     }
-
     function findAllWidgetsForPage(req, res) {
         var pageId = req.params.pageId;
         model.widgetModel.findAllWidgetsForPage(pageId)

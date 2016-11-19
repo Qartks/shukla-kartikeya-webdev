@@ -1,6 +1,7 @@
 module.exports = function () {
     var model = {};
     var mongoose = require('mongoose');
+    mongoose.Promise = require('bluebird');
     var UserSchema = require('./user.schema.server')();
     var UserModel = mongoose.model("UserModel", UserSchema);
 

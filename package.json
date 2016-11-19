@@ -5,6 +5,7 @@
   "main": "server.js",
   "dependencies": {
     "angular": "^1.5.8",
+    "bluebird": "^3.4.6",
     "body-parser": "^1.15.1",
     "express": "^4.13.4",
     "jquery": "^3.1.1",

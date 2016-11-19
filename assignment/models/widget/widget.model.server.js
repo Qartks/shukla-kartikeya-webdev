@@ -1,7 +1,7 @@
 module.exports = function () {
     var model = {};
-    var index = 0;
     var mongoose = require('mongoose');
+    mongoose.Promise = require('bluebird');
     var WidgetSchema = require('./widget.schema.server')();
     var WidgetModel = mongoose.model("WidgetModel", WidgetSchema);
 
@@ -37,17 +37,22 @@ module.exports = function () {
     function createWidget(pageId, widget) {
         return WidgetModel.create(widget)
             .then(function (widgetObj) {
-                model.pageModel
-                    .findPageById(pageId)
-                    .then(function (pageObj) {
-                        pageObj.widgets.push(widgetObj);
-                        pageObj.save();
-                        widgetObj._page = pageObj._id;
-                        widgetObj.type = widget.type;
-                        widgetObj.index = index++;
-                        widgetObj.save();
-                    }, function (err) {
-                        console.log(err);
+
+                WidgetModel
+                    .find({ _page : pageId})
+                    .count(function (err, count) {
+                        model.pageModel
+                            .findPageById(pageId)
+                            .then(function (pageObj) {
+                                pageObj.widgets.push(widgetObj);
+                                pageObj.save();
+                                widgetObj._page = pageObj._id;
+                                widgetObj.type = widget.type;
+                                widgetObj.index = count;
+                                widgetObj.save();
+                            }, function (err) {
+                                console.log(err);
+                            });
                     });
                 return widgetObj;
             }, function (err) {
@@ -137,23 +142,61 @@ module.exports = function () {
     }
 
     function deleteWidget(widgetId) {
-        return WidgetModel.remove( { _id : widgetId} )
-            .then(function (widgetObj) {
-                model
-                    .pageModel
-                    .findPageOfWidget(widgetId)
-                    .then(function (pageObj) {
-                        var index = pageObj.widgets.indexOf(widgetId);
-                        pageObj.widgets.splice(index, 1);
-                        pageObj.save();
-                    });
-                return widgetObj;
-            }, function (err) {
-                console.log(err);
-            })
+
+        return WidgetModel
+            .findOne({_id: widgetId},
+                function (err, widget) {
+                    var index = widget.index;
+                    var pageId = widget._page;
+
+                    model
+                        .pageModel
+                        .findPageOfWidget(widgetId)
+                        .then(function (pageObj) {
+                            var index = pageObj.widgets.indexOf(widgetId);
+                            pageObj.widgets.splice(index, 1);
+                            pageObj.save();
+                        });
+
+                    WidgetModel
+                        .find({_page: pageId},
+                            function (err, widgets) {
+                                widgets.forEach(function (widget) {
+                                    if (widget.index > index) {
+                                        widget.index--;
+                                        widget.save(function() {});
+                                    } else if (widget.index === index) {
+                                        widget.remove();
+                                    }
+                                })
+                            });
+                });
     }
 
     function reorderWidget(pageId, start, end) {
+        start = parseInt(start);
+        end = parseInt(end);
 
+        return WidgetModel
+            .find({_page: pageId},
+                function (err, widgets) {
+                    widgets.forEach(function (widget) {
+                        if (start > end) {
+                            if (widget.index >= end && widget.index < start) {
+                                widget.index++;
+                            } else if (widget.index === start) {
+                                widget.index = end;
+                            }
+                            widget.save(function () {});
+                        } else {
+                            if (widget.index <= end && widget.index > start) {
+                                widget.index--;
+                            } else if (widget.index === start) {
+                                widget.index = end;
+                            }
+                            widget.save(function () {});
+                        }
+                    });
+                });
     }
 };

@@ -26,13 +26,13 @@
             var pageId = $routeParams["pid"];
             
             function sort(start, end) {
-                // WidgetService.sortable(start, end, pageId)
-                //     .success(function () {
-                //
-                //     })
-                //     .error(function (err) {
-                //         console.log(err);
-                //     });
+                WidgetService.sortable(start, end, pageId)
+                    .success(function (obj) {
+
+                    })
+                    .error(function (err) {
+                        console.log(err);
+                    });
             }
         }
 
