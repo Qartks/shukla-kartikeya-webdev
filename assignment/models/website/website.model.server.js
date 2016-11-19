@@ -10,6 +10,7 @@ module.exports = function () {
         findWebsiteById : findWebsiteById,
         updateWebsite : updateWebsite,
         deleteWebsite : deleteWebsite,
+        findWebsiteOfPage : findWebsiteOfPage,
         setModel : setModel
     };
 
@@ -17,6 +18,10 @@ module.exports = function () {
 
     function setModel(_model) {
         model = _model;
+    }
+
+    function findWebsiteOfPage(pageId) {
+        return WebsiteModel.findOne({ pages : pageId});
     }
 
     function createWebsiteForUser(userId, website) {
@@ -31,7 +36,7 @@ module.exports = function () {
                         websiteObj.save();
                     }, function (err) {
                         console.log(err);
-                    })
+                    });
                 return websiteObj;
             });
     }

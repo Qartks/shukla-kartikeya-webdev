@@ -10,7 +10,8 @@ module.exports = function () {
         findPageById : findPageById,
         updatePage : updatePage,
         deletePage : deletePage,
-        setModel : setModel
+        setModel : setModel,
+        findPageOfWidget : findPageOfWidget
     };
 
     return api;
@@ -19,23 +20,62 @@ module.exports = function () {
         model = _model;
     }
 
-    function createPage(websiteId, page) {
+    function findPageOfWidget(widgetId) {
+        return PageModel.findOne({widgets : widgetId});
+    }
 
+    function createPage(websiteId, page) {
+        return PageModel.create(page)
+            .then(function (pageObj) {
+                model.websiteModel
+                    .findWebsiteById(websiteId)
+                    .then(function (webObj) {
+                        webObj.pages.push(pageObj);
+                        webObj.save();
+                        pageObj._website = webObj._id;
+                        pageObj.save();
+                    }, function (err) {
+                        console.log(err);
+                    });
+                return pageObj;
+            });
     }
 
     function findAllPagesForWebsite(websiteId) {
-
+        return PageModel.find({ _website : websiteId});
     }
 
     function findPageById(pageId) {
-
+        return PageModel.findById(pageId);
     }
 
     function updatePage(pageId, page) {
-
+        return PageModel.update(
+            {
+                _id : pageId
+            },
+            {
+                name : page.name,
+                title : page.title,
+                description : page.description
+            }
+        );
     }
 
     function deletePage(pageId) {
-
+        return PageModel.remove( { _id : pageId } )
+            .then( function (pageObj) {
+                model
+                    .websiteModel
+                    .findWebsiteOfPage(pageId)
+                    .then(function (webObj) {
+                        var index = webObj.pages.indexOf(pageId);
+                        webObj.pages.splice(index, 1);
+                        webObj.save();
+                    });
+                return pageObj;
+            }, function (err) {
+                console.log(err);
+            });
     }
 };

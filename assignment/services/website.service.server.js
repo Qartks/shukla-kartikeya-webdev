@@ -1,16 +1,5 @@
 module.exports = function (app, model) {
 
-    // var websites = [
-    //     { "_id": 123, "name": "Facebook",    "developerId": "456", "desc" : "Facebook" },
-    //     { "_id": 234, "name": "Tweeter",     "developerId": "456", "desc" : "Tweetster" },
-    //     { "_id": 456, "name": "Gizmodo",     "developerId": "456", "desc" : "Gizmo" },
-    //     { "_id": 567, "name": "Tic Tac Toe", "developerId": "123", "desc" : "Tic" },
-    //     { "_id": 678, "name": "Checkers",    "developerId": "123", "desc" : "Check" },
-    //     { "_id": 789, "name": "Chess",       "developerId": "234", "desc" : "Chess Site" },
-    //     { "_id": 790, "name": "Mega Chess",  "developerId": "234", "desc" : "Mega Chess Site" },
-    //     { "_id": 791, "name": "Meta-Chess",  "developerId": "234", "desc" : "Chessy Chess Site" }
-    // ];
-
     app.get("/api/user/:userId/website", findAllWebsitesForUser);
     app.post("/api/user/:userId/website", createWebsite);
     app.get("/api/website/:websiteId", findWebsiteById);
@@ -56,11 +45,13 @@ module.exports = function (app, model) {
         var website = req.body;
         var websiteId = req.params.websiteId;
         model.websiteModel.updateWebsite(websiteId, website)
-            .then( function (status) {
-                res.sendStatus(status);
-            }, function (err) {
-                res.sendStatus(400).send(err);
-            });
+            .then(
+                function () {
+                    res.sendStatus(200);
+                }, function (err) {
+                    res.sendStatus(400).send(err);
+                }
+                );
 
     }
 
