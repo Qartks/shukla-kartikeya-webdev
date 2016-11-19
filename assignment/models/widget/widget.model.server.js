@@ -1,5 +1,6 @@
 module.exports = function () {
     var model = {};
+    var index = 0;
     var mongoose = require('mongoose');
     var WidgetSchema = require('./widget.schema.server')();
     var WidgetModel = mongoose.model("WidgetModel", WidgetSchema);
@@ -11,13 +12,26 @@ module.exports = function () {
         updateWidget : updateWidget,
         deleteWidget : deleteWidget,
         reorderWidget : reorderWidget,
-        setModel : setModel
+        setModel : setModel,
+        updateImageUrl : updateImageUrl
     };
 
     return api;
 
     function setModel(_model) {
         model = _model;
+    }
+
+    function updateImageUrl(widgetId, originalname, f, text) {
+        return WidgetModel.update(
+            {
+                _id : widgetId
+            },
+            {
+                name : originalname,
+                text : text,
+                url : f
+            });
     }
 
     function createWidget(pageId, widget) {
@@ -30,6 +44,7 @@ module.exports = function () {
                         pageObj.save();
                         widgetObj._page = pageObj._id;
                         widgetObj.type = widget.type;
+                        widgetObj.index = index++;
                         widgetObj.save();
                     }, function (err) {
                         console.log(err);
@@ -49,26 +64,85 @@ module.exports = function () {
     }
 
     function updateWidget(widgetId, widget) {
-        return WidgetModel.update(
-            {
-                _id : widgetId
-            },
-            {
-                name : widget.name,
-                text : widget.text,
-                placeholder : widget.placeholder,
-                description : widget.description,
-                url : widget.url,
-                width : widget.width,
-                height :widget.height,
-                rows : widget.height,
-                size : widget.size,
-                class : widget.class,
-                icon : widget.icon,
-                deletable : widget.deletable,
-                formatted : widget.formatted
-            }
-        );
+        if (widget.type == 'HEADING') {
+            return WidgetModel.update(
+                {
+                    _id : widgetId
+                },
+                {
+                    name : widget.name,
+                    text : widget.text,
+                    size : widget.size
+                }
+            );
+        } else if (widget.type == 'YOUTUBE') {
+            return WidgetModel.update(
+                {
+                    _id : widgetId
+                },
+                {
+                    name : widget.name,
+                    text : widget.text,
+                    url : widget.url,
+                    width : widget.width
+                }
+            );
+        } else if (widget.type == 'IMAGE') {
+            return WidgetModel.update(
+                {
+                    _id : widgetId
+                },
+                {
+                    name : widget.name,
+                    text : widget.text,
+                    url : widget.url,
+                    width : widget.width
+                }
+            );
+        } else if (widget.type == 'INPUT') {
+            return WidgetModel.update(
+                {
+                    _id : widgetId
+                },
+                {
+                    name : widget.name,
+                    text : widget.text
+                }
+            );
+        } else if (widget.type == 'HTML'){
+            return WidgetModel.update(
+                {
+                    _id : widgetId
+                },
+                {
+                    name : widget.name,
+                    text : widget.text
+                }
+            );
+        } else {
+
+            return WidgetModel.update(
+                {
+                    _id : widgetId
+                },
+                {
+                    name : widget.name,
+                    text : widget.text,
+                    placeholder : widget.placeholder,
+                    description : widget.description,
+                    url : widget.url,
+                    width : widget.width,
+                    height :widget.height,
+                    rows : widget.height,
+                    size : widget.size,
+                    class : widget.class,
+                    icon : widget.icon,
+                    deletable : widget.deletable,
+                    formatted : widget.formatted
+                }
+            );
+        }
+
     }
 
     function deleteWidget(widgetId) {

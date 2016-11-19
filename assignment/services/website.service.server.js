@@ -46,7 +46,7 @@ module.exports = function (app, model) {
         var websiteId = req.params.websiteId;
         model.websiteModel.updateWebsite(websiteId, website)
             .then(
-                function () {
+                function (website) {
                     res.sendStatus(200);
                 }, function (err) {
                     res.sendStatus(400).send(err);

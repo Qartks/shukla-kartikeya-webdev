@@ -46,7 +46,7 @@
         }
 
         function widgetToCreate(type) {
-            vm.wdgt.widgetType = type;
+            vm.wdgt.type = type;
             WidgetService.createWidget(vm.pageId, vm.wdgt)
                 .success(function (w) {
                     if (w == "0") {
@@ -62,6 +62,9 @@
         }
 
         function init() {
+            if (typeof vm.widgetId === 'undefined') {
+                return;
+            }
             vm.widget = WidgetService.findWidgetById(vm.widgetId)
                 .success(function (widget) {
                     if (widget == "0") {

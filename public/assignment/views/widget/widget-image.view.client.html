@@ -29,7 +29,7 @@
             <label for="image_text">Text </label>
             <input ng-model="model.widget.text" type="text" class="form-control" id="image_text" placeholder="Text">
         </div>
-        <div class="form-group">
+        <div ng-hide="model.newWidget" class="form-group">
             <label for="image_url">URL </label>
             <input ng-model="model.widget.url" type="url" class="form-control" id="image_url" placeholder="image.png">
         </div>
@@ -45,6 +45,7 @@
         <input  name="userId"    value="{{model.userId}}"       style="display: none"/>
         <input  name="websiteId" value="{{model.websiteId}}"    style="display: none"/>
         <input  name="pageId"    value="{{model.pageId}}"       style="display: none"/>
+        <input  name="url"       value="{{model.widget.url}}"   style="display: none"/>
         <button type="submit"    class="btn btn-block btn-primary">Upload Image</button>
         <a ng-hide="model.newWidget" ng-click="model.deleteWidget()" class="btn btn-danger btn-block">Delete</a>
     </form>

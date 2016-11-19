@@ -11,26 +11,20 @@ module.exports = function (app, model) {
         var websiteId = req.body.websiteId;
         var pageId = req.body.pageId;
         var widgetId = req.body.widgetId;
+        var text = req.body.text;
         var imageFile = req.file;
 
         var originalname  = imageFile.originalname; // file name on user's computer
         var filename      = imageFile.filename;     // new file name in upload folder
         var path          = imageFile.path;         // full path of uploaded file
 
-
-        for (var wg in widgets) {
-            var existingWidget = widgets[wg];
-            if (pageId !== existingWidget.pageId) {
-                continue;
-            }
-            if (widgetId == existingWidget._id) {
-                existingWidget.name = originalname;
-                existingWidget.url = '/assignment/uploads/' + filename;
-                break;
-            }
-        }
-
-        res.redirect("/assignment/index.html#/user/"+userId+"/website/"+websiteId+"/page/"+pageId+"/widget/"+widgetId);
+        var f = '/assignment/uploads/' + filename;
+        model.widgetModel.updateImageUrl(widgetId, originalname, f, text)
+            .then( function (status) {
+                res.redirect("/assignment/index.html#/user/"+userId+"/website/"+websiteId+"/page/"+pageId+"/widget/"+widgetId);
+            }, function (err) {
+                res.sendStatus(400).send(err);
+            });
     }
 
     app.get("/api/page/:pageId/widget", findAllWidgetsForPage);
@@ -100,7 +94,7 @@ module.exports = function (app, model) {
         var widgetId = req.params.widgetId;
         model.widgetModel.updateWidget(widgetId, widget)
             .then( function (status) {
-                res.sendStatus(status);
+                res.sendStatus(200);
             }, function (err) {
                 res.sendStatus(400).send(err);
             });

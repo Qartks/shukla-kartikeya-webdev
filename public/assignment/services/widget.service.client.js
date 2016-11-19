@@ -17,7 +17,6 @@
         return api;
 
         function sortable(start, end, pageId) {
-            // var url = "/api/widgets?start=START&end=END";
             var url = "/api/page/"+pageId+"/widget?initial=index1&final=index2";
             url = url
                 .replace("index1", start)
