@@ -24,7 +24,7 @@
             <div  ng-switch="w.type">
                 <div ng-switch-when="YOUTUBE">
                     <div class="list-group-item wrapper">
-                        <div class="embed-responsive embed-responsive-16by9">
+                        <div class="embed-responsive embed-responsive-16by9 youtube-widget">
                             <iframe ng-src="{{ WidgetListCtrl.checkSafeYouTube(w.url) }}" frameborder="0" allowfullscreen></iframe>
                         </div>
                         <div class="overlay">
@@ -68,6 +68,23 @@
                     <div class="list-group-item wrapper">
                         <div ng-bind-html="WidgetListCtrl.checkSafeHTML(w.text)"></div>
                         <div class="overlay">
+                            <span class="glyphicon glyphicon-align-justify pull-right"></span>
+                            <a href="#/user/{{WidgetListCtrl.userId}}/website/{{WidgetListCtrl.websiteId}}/page/{{WidgetListCtrl.pageId}}/widget/{{w._id}}">
+                                <span class="glyphicon glyphicon-cog pull-right"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div ng-switch-when="TEXT">
+                    <div class="list-group-item wrapper">
+                            <div ng-if="w.formatted" text-angular></div>
+                            <input ng-if="!w.formatted && (!w.rows || w.rows===1)"
+                                   placeholder="{{w.placeholder}}" class="form-control"/>
+                            <textarea ng-if="!w.formatted && (w.rows > 1)"
+                                      rows="{{w.rows}}" placeholder="{{w.placeholder}}"
+                                      class="form-control">{{w.text}}</textarea>
+                            <div class="overlay">
                             <span class="glyphicon glyphicon-align-justify pull-right"></span>
                             <a href="#/user/{{WidgetListCtrl.userId}}/website/{{WidgetListCtrl.websiteId}}/page/{{WidgetListCtrl.pageId}}/widget/{{w._id}}">
                                 <span class="glyphicon glyphicon-cog pull-right"></span>

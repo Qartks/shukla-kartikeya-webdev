@@ -126,18 +126,9 @@ module.exports = function () {
                     _id : widgetId
                 },
                 {
-                    name : widget.name,
                     text : widget.text,
                     placeholder : widget.placeholder,
-                    description : widget.description,
-                    url : widget.url,
-                    width : widget.width,
-                    height :widget.height,
-                    rows : widget.height,
-                    size : widget.size,
-                    class : widget.class,
-                    icon : widget.icon,
-                    deletable : widget.deletable,
+                    rows : widget.rows,
                     formatted : widget.formatted
                 }
             );

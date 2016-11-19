@@ -21,18 +21,14 @@
 
 <div class="container">
     <form>
-        <div class="form-group">
-            <label for="image_name">Name</label>
-            <input ng-model="model.widget.name" type="text" class="form-control" id="image_name" placeholder="Name">
-        </div>
-        <div class="form-group">
-            <label for="image_text">Text </label>
-            <input ng-model="model.widget.text" type="text" class="form-control" id="image_text" placeholder="Text">
-        </div>
-        <div class="form-group">
-            <label for="image_url">URL </label>
-            <input ng-model="model.widget.url" type="url" class="form-control" id="image_url" placeholder="https://youtu.be/uLSoMeUrl4">
-        </div>
+        Text
+        <input ng-model="model.widget.text" class="form-control"/>
+        Rows
+        <input ng-model="model.widget.rows" class="form-control" type="number"/>
+        Placeholder
+        <input ng-model="model.widget.placeholder" class="form-control"/>
+        Formatted
+        <input ng-model="model.widget.formatted" type="checkbox"/>
         <a ng-hide="model.newWidget" ng-click="model.deleteWidget()" class="btn btn-danger btn-block">Delete</a>
     </form>
 
