@@ -5,9 +5,16 @@ module.exports = function (app, model) {
     var session      = require('express-session');
     var bcrypt = require("bcrypt-nodejs");
     var LocalStrategy    = require('passport-local').Strategy;
+    var FacebookStrategy = require('passport-facebook').Strategy;
+
+    var facebookConfig = {
+        clientID     : process.env.FACEBOOK_CLIENT_ID,
+        clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
+        callbackURL  : process.env.FACEBOOK_CALLBACK_URL
+    };
 
     app.use(session({
-        secret: 'this is the secret',
+        secret: process.env.EXPRESS_SESSION_SECRET_WEBDEV,
         resave: true,
         saveUninitialized: true
     }));
@@ -15,6 +22,7 @@ module.exports = function (app, model) {
     app.use(passport.initialize());
     app.use(passport.session());
     passport.use(new LocalStrategy(localStrategy));
+    passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
@@ -22,7 +30,15 @@ module.exports = function (app, model) {
     app.post("/api/login", passport.authenticate('local'), login);
     app.post("/api/logout", logout);
     app.get("/api/loggedin", loggedin);
+
     app.post ('/api/register', register);
+
+    app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+    app.get("/auth/facebook/callback",
+        passport.authenticate('facebook', {
+            successRedirect: '/assignment/index.html#/user',
+            failureRedirect: '/assignment/index.html#/login'
+        }));
 
 
     app.post("/api/user", createUser);
@@ -38,6 +54,43 @@ module.exports = function (app, model) {
         } else {
             next();
         }
+    }
+
+    function facebookStrategy(token, refreshToken, profile, done) {
+        model
+            .userModel
+            .findUserByFacebookId(profile.id)
+            .then(
+                function(user) {
+                    if(user) {
+                        return done(null, user);
+                    } else {
+                        var names = profile.displayName.split(" ");
+                        var newFacebookUser = {
+                            lastName:  names[1],
+                            firstName: names[0],
+                            username: names[0] + "-" + names[1],
+                            email:     profile.emails ? profile.emails[0].value:"",
+                            facebook: {
+                                id:    profile.id,
+                                token: token
+                            }
+                        };
+                        model
+                            .userModel
+                            .createUser(newFacebookUser)
+                            .then(function (user) {
+                                return done(null, user);
+                            }, function (err) {
+                                console.log(err);
+                                return done(err, null);
+                            });
+                    }
+                },
+                function(err) {
+                    if (err) { return done(err); }
+                }
+            );
     }
 
     function localStrategy(username, password, done) {

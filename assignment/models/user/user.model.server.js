@@ -14,6 +14,7 @@ module.exports = function () {
         deleteUser : deleteUser,
         findAllWebsiteForUser : findAllWebsiteForUser,
         findUserOfWebsite : findUserOfWebsite,
+        findUserByFacebookId: findUserByFacebookId,
         setModel : setModel
     };
 
@@ -21,6 +22,10 @@ module.exports = function () {
 
     function setModel(_model) {
         model = _model;
+    }
+
+    function findUserByFacebookId(facebookId) {
+        return UserModel.findOne({'facebook.id': facebookId});
     }
 
     function findUserOfWebsite(websiteId) {
