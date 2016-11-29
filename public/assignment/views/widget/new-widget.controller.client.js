@@ -15,6 +15,12 @@
         vm.widgetToCreate = widgetToCreate;
         vm.updateWidget = updateWidget;
         vm.goBack = goBack;
+
+        vm.goSearchFlickr = goSearchFlickr;
+
+        function goSearchFlickr() {
+            $location.url("/user/"+ vm.userId +"/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + vm.widgetId+ "/search");
+        }
         
         function goBack() {
             WidgetService.deleteWidget(vm.widgetId)

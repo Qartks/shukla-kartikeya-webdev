@@ -16,6 +16,11 @@
         vm.updateWidget = updateWidget;
         vm.goBack = goBack;
         vm.uploadFile = uploadFile;
+        vm.goSearchFlickr = goSearchFlickr;
+
+        function goSearchFlickr() {
+            $location.url("/user/"+ vm.userId +"/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + vm.widgetId+ "/search");
+        }
 
         function uploadFile() {
             vm.fileUpload = !vm.fileUpload;

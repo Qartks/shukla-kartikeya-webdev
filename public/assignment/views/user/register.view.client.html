@@ -1,3 +1,8 @@
+<div ng-show="RegisterCtrl.error"
+     class="alert alert-danger">
+    {{RegisterCtrl.error}}
+</div>
+
 <div class="container">
     <h1>Register</h1>
     <input ng-model="RegisterCtrl.user.username"
@@ -8,7 +13,8 @@
            type="password"
            class="form-control"
            placeholder="pA$$w0rD"/>
-    <input type="password"
+    <input ng-model="RegisterCtrl.user.verifyPassword"
+           type="password"
            class="form-control"
            placeholder="Verify Password"/>
     <a class="btn btn-primary btn-block"

@@ -47,12 +47,11 @@
         <input  name="pageId"    value="{{model.pageId}}"       style="display: none"/>
         <input  name="url"       value="{{model.widget.url}}"   style="display: none"/>
         <button type="submit"    class="btn btn-block btn-primary">Upload Image</button>
+        <a ng-click="model.goSearchFlickr()" class="btn btn-info btn-block"> Search Flickr</a>
         <a ng-hide="model.newWidget" ng-click="model.deleteWidget()" class="btn btn-danger btn-block">Delete</a>
-    </form>
-
-    <form>
 
     </form>
+
 
 </div>
 

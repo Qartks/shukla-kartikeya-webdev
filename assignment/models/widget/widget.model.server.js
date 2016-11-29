@@ -69,76 +69,8 @@ module.exports = function () {
     }
 
     function updateWidget(widgetId, widget) {
-        if (widget.type == 'HEADING') {
-            return WidgetModel.update(
-                {
-                    _id : widgetId
-                },
-                {
-                    name : widget.name,
-                    text : widget.text,
-                    size : widget.size
-                }
-            );
-        } else if (widget.type == 'YOUTUBE') {
-            return WidgetModel.update(
-                {
-                    _id : widgetId
-                },
-                {
-                    name : widget.name,
-                    text : widget.text,
-                    url : widget.url,
-                    width : widget.width
-                }
-            );
-        } else if (widget.type == 'IMAGE') {
-            return WidgetModel.update(
-                {
-                    _id : widgetId
-                },
-                {
-                    name : widget.name,
-                    text : widget.text,
-                    url : widget.url,
-                    width : widget.width
-                }
-            );
-        } else if (widget.type == 'INPUT') {
-            return WidgetModel.update(
-                {
-                    _id : widgetId
-                },
-                {
-                    name : widget.name,
-                    text : widget.text
-                }
-            );
-        } else if (widget.type == 'HTML'){
-            return WidgetModel.update(
-                {
-                    _id : widgetId
-                },
-                {
-                    name : widget.name,
-                    text : widget.text
-                }
-            );
-        } else {
-
-            return WidgetModel.update(
-                {
-                    _id : widgetId
-                },
-                {
-                    text : widget.text,
-                    placeholder : widget.placeholder,
-                    rows : widget.rows,
-                    formatted : widget.formatted
-                }
-            );
-        }
-
+        delete widget._id;
+        return WidgetModel.update({_id: widgetId}, {$set: widget});
     }
 
     function deleteWidget(widgetId) {
@@ -187,14 +119,14 @@ module.exports = function () {
                             } else if (widget.index === start) {
                                 widget.index = end;
                             }
-                            widget.save(function () {});
+                            widget.save();
                         } else {
                             if (widget.index <= end && widget.index > start) {
                                 widget.index--;
                             } else if (widget.index === start) {
                                 widget.index = end;
                             }
-                            widget.save(function () {});
+                            widget.save();
                         }
                     });
                 });
