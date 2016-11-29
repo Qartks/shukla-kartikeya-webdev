@@ -5,16 +5,37 @@
         {{LoginCtrl.error}}
     </div>
     <h1>Login</h1>
-    <input  ng-model="LoginCtrl.user.username"
-            type="text"
-            class="form-control"
-            placeholder="Username"/>
-    <input  ng-model="LoginCtrl.user.password"
-            type="password"
-            class="form-control"
-            placeholder="pA$$w0rD"/>
-    <a class="btn btn-primary btn-block" ng-click="LoginCtrl.login(LoginCtrl.user)">
-        Login</a>
-    <a class="btn btn-success btn-block" href="#/register">
-        Register</a>
+
+
+    <form name="userForm" novalidate>
+        <div class="form-group" ng-class="{ 'has-error': userForm.username.$invalid }" >
+            <label class="control-label">Username</label>
+            <input type="text" class="form-control" name="username" ng-model="LoginCtrl.user.username" required placeholder="username" />
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': userForm.password.$invalid }" >
+            <label class="control-label">Password</label>
+            <input type="password" class="form-control" name="password" ng-model="LoginCtrl.user.password" required placeholder="password" />
+        </div>
+        <a class="btn btn-primary btn-block" ng-click="LoginCtrl.login(LoginCtrl.user)">
+            Login</a>
+        <a class="btn btn-success btn-block" href="#/register">
+            Register</a>
+        <a href="/auth/facebook"
+           class="btn btn-block btn-primary">
+            <span class="fa fa-facebook"></span>
+        </a>
+    </form>
+
+
+    <!--<input  ng-model="LoginCtrl.user.username"-->
+            <!--type="text"-->
+            <!--class="form-control"-->
+            <!--placeholder="Username"-->
+            <!--required/>-->
+    <!--<input  ng-model="LoginCtrl.user.password"-->
+            <!--type="password"-->
+            <!--class="form-control"-->
+            <!--placeholder="pA$$w0rD"-->
+            <!--required/>-->
+
 </div>

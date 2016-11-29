@@ -52,10 +52,14 @@
             </ul>
         </div>
         <div class="col-sm-12 col-md-8">
-            <form>
-                <div class="form-group">
+            <div ng-show="NewWebsiteCtrl.error"
+                 class="alert alert-danger">
+                {{NewWebsiteCtrl.error}}
+            </div>
+            <form name="newWebsiteform">
+                <div class="form-group" ng-class="{ 'has-error': newWebsiteform.name.$invalid }">
                     <label for="web_site_name">Name</label>
-                    <input ng-model="NewWebsiteCtrl.website.name" type="text" class="form-control" id="web_site_name" placeholder="Google">
+                    <input ng-model="NewWebsiteCtrl.website.name" name="name" type="text" class="form-control" id="web_site_name" placeholder="Google" required>
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>

@@ -3,11 +3,13 @@
         .module("WebAppMaker")
         .controller("EditPageController", EditPageController);
 
-    function EditPageController($routeParams, $location, PageService) {
+    function EditPageController($routeParams, $location, PageService, $scope) {
         var vm = this;
         vm.userId = $routeParams["uid"];
         vm.websiteId = $routeParams["wid"];
         vm.pageId = $routeParams["pid"];
+        vm.error="";
+
         vm.updatePage = updatePage;
         vm.deletePage = deletePage;
 
@@ -28,12 +30,17 @@
         init();
 
         function updatePage() {
+
+            if (!$scope.editpageform.$valid) {
+                vm.error = "There are invalid fields";
+                return;
+            }
+
             PageService.updatePage(vm.pageId, vm.page)
                 .success(function (page) {
-                    if (pages == "0") {
+                    if (page == "0") {
                         vm.error = "Can't Update Page";
                     } else {
-                        vm.page = page;
                         $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
                     }
                 })

@@ -3,27 +3,27 @@
         .module("WebAppMaker")
         .controller("LoginController", LoginController);
 
-    function LoginController($location, UserService) {
+    function LoginController($scope, $rootScope, $location, UserService) {
         var vm = this;
         vm.login = login;
+
 
         function login(user) {
             if (!user) {
                 vm.error = "Type Something, mate!";
                 return;
             }
-           UserService.findUserByCredentials(user.username, user.password)
-                .success(function (user) {
-                    if(user === "0") {
-                        vm.error = "No Such user";
-                    } else {
-                        $location.url("/user/" + user._id);
-                    }
-                })
-                .error(function (err) {
-                    console.log(err);
-                });
-            
+            if (!$scope.userForm.$valid) {
+                vm.error = "There are invalid fields";
+                return;
+            }
+            UserService.login(user.username, user.password)
+                .then(
+                    function(response) {
+                        var user = response.data;
+                        $rootScope.currentUser = user;
+                        $location.url("/user/"+user._id);
+                    });
         }
     }
 

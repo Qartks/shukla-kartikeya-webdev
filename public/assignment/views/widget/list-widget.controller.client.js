@@ -13,6 +13,9 @@
         vm.checkSafeYouTube = checkSafeYouTube;
 
         function checkSafeYouTube(url) {
+            if (!url) {
+                return;
+            }
             var parts = url.split('/');
             id = parts[parts.length - 1];
             url = "https://www.youtube.com/embed/" + id;

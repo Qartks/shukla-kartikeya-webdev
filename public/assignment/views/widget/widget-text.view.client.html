@@ -20,7 +20,18 @@
 </nav>
 
 <div class="container">
-    <form>
+
+
+    <div ng-show="model.error"
+         class="alert alert-danger">
+        {{model.error}}
+    </div>
+
+    <form name="widgetform">
+        <div class="form-group" ng-class="{ 'has-error': widgetform.name.$invalid }" >
+            Name
+            <input ng-model="model.widget.text" name="name" class="form-control" required/>
+        </div>
         Text
         <input ng-model="model.widget.text" class="form-control"/>
         Rows

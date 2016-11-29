@@ -3,7 +3,7 @@
         .module("WebAppMaker")
         .controller("RegisterController", RegisterController);
 
-    function RegisterController($location, UserService) {
+    function RegisterController($location, $rootScope, UserService, $scope) {
         var vm = this;
         vm.register = register;
         vm.error="";
@@ -11,27 +11,28 @@
 
         function register (user) {
 
+
+            if (!$scope.registerForm.$valid) {
+                vm.error = "There are invalid fields";
+                return;
+            }
+
             if (user.username && user.password) {
                 if (user.password === user.verifyPassword) {
-                    UserService.createUser(user)
-                        .success(function (user) {
-                            if(user == "0") {
-                                vm.error = "Unable to Register : Duplicate User";
-                            } else {
-                                $location.url("/user/" + user._id);
-                            }
-                        })
-                        .error(function (err) {
-                            console.log(err);
-                        });
+                    UserService
+                        .register(user)
+                        .then(
+                            function(response) {
+                                var user = response.data;
+                                $rootScope.currentUser = user;
+                                $location.url("/user/"+user._id);
+                            });
                 } else {
                     vm.error = "Make sure passwords match";
                 }
             } else {
                 vm.error = "Please enter values for all fields";
             }
-
-
 
         }
     }

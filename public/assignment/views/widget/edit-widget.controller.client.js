@@ -3,7 +3,7 @@
         .module("WebAppMaker")
         .controller("EditWidgetController", EditWidgetController);
 
-    function EditWidgetController($routeParams, $location, WidgetService) {
+    function EditWidgetController($routeParams, $location, WidgetService, $scope) {
         var vm = this;
         vm.userId = $routeParams["uid"];
         vm.websiteId = $routeParams["wid"];
@@ -59,6 +59,12 @@
         }
         
         function updateWidget() {
+
+            if (!vm.widget.name) {
+                vm.error = "There are invalid fields";
+                return;
+            }
+
             WidgetService.updateWidget(vm.widgetId, vm.widget)
                 .success(function (w) {
                     if (w == "0") {

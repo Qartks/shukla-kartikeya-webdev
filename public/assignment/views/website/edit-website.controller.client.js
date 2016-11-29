@@ -3,7 +3,7 @@
         .module("WebAppMaker")
         .controller("EditWebsiteController", EditWebsiteController);
 
-    function EditWebsiteController($routeParams, $location,  WebsiteService) {
+    function EditWebsiteController($routeParams, $location,  WebsiteService, $scope) {
         var vm = this;
         vm.websiteId = $routeParams["wid"];
         vm.userId = $routeParams["uid"];
@@ -22,6 +22,12 @@
 
 
         function updateWebsite() {
+
+            if (!$scope.editWebsiteform.$valid) {
+                vm.error = "There are invalid fields";
+                return;
+            }
+
             WebsiteService.updateWebsite(vm.websiteId, vm.website)
                 .success(function (website) {
                     if (website == "0") {
