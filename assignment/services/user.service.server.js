@@ -14,7 +14,7 @@ module.exports = function (app, model) {
     };
 
     app.use(session({
-        secret: process.env.EXPRESS_SESSION_SECRET_WEBDEV,
+        secret: "This is a secret yo",
         resave: true,
         saveUninitialized: true
     }));
