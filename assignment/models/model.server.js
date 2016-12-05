@@ -1,7 +1,15 @@
 module.exports = function () {
 
     var mongoose = require('mongoose');
-    mongoose.connect('mongodb://localhost/webdev');
+    var connectionString = 'mongodb://localhost/webdev';
+
+    if(process.env.MLAB_PASSWORD) {
+        connectionString = 'mongodb://' +
+            process.env.MLAB_USERNAME + ':' +
+            process.env.MLAB_PASSWORD +
+            '@ds013916.mlab.com:13916/web-dev-kartikeya-db';
+    }
+    mongoose.connect(connectionString);
 
     var userModel = require('./user/user.model.server')();
     var websiteModel = require('./website/website.model.server')();
